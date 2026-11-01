@@ -13,7 +13,7 @@ applications and solving real-world problems through technology.
 
 ## 💻 Technical Skills
 
-- Programming: Java, JavaScript, PHP
+- Programming: Java, JavaScript, C++, PHP
 - Frontend: HTML, CSS, Bootstrap, jQuery
 - Backend: Node.js, Express.js
 - Database: MySQL, MongoDB
