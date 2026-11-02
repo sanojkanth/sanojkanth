@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SystemDefinition name="Central HARDWARES Management System" version="1.0" status="As-Is">
+    <Metadata>
+        <CreatedDate>2026-02-02</CreatedDate>
+        <Description>Current state of the Inventory and POS Management System for Central HARDWARES.</Description>
+        <TechnologyStack>
+            <Frontend>HTML5, Vanilla CSS3, Javascript (ES6+)</Frontend>
+            <Storage>Browser LocalStorage</Storage>
+            <Libraries>Chart.js, Font Awesome 6.4.0, Google Fonts (Inter)</Libraries>
+        </TechnologyStack>
+    </Metadata>
+
+    <Modules>
+        <Module id="MOD-001" name="Dashboard" file="index.html">
+            <Description>Central control panel showing real-time business metrics.</Description>
+            <Features>
+                <Feature id="F-101">Live Revenue Tracking (Sparklines)</Feature>
+                <Feature id="F-102">Sales Analytics Charting</Feature>
+                <Feature id="F-103">Recent Orders Feed</Feature>
+                <Feature id="F-104">Low Stock Visual Alerts</Feature>
+            </Features>
+        </Module>
+
+        <Module id="MOD-002" name="Inventory Management" file="inventory.html">
+            <Description>Comprehensive tool for tracking hardware stock and product details.</Description>
+            <Features>
+                <Feature id="F-201">CRUD Operations for Products</Feature>
+                <Feature id="F-202">Stock Level Monitoring (Full/Low/Out)</Feature>
+                <Feature id="F-203">Category-based Filtering</Feature>
+                <Feature id="F-204">CSV Data Export</Feature>
+            </Features>
+        </Module>
+
+        <Module id="MOD-003" name="Point of Sale (POS)" file="pos.html">
+            <Description>Interface for processing customer transactions.</Description>
+            <Features>
+                <Feature id="F-301">Barcode/Search Product Selection</Feature>
+                <Feature id="F-302">Cart Management and Discounting</Feature>
+                <Feature id="F-303">Receipt Generation</Feature>
+            </Features>
+        </Module>
+
+        <Module id="MOD-004" name="Order Tracking" file="orders.html">
+            <Description>Management of sales orders and fulfillment status.</Description>
+            <Features>
+                <Feature id="F-401">Order Status Workflow (Pending/Shipping/Complete)</Feature>
+                <Feature id="F-402">Order History and Search</Feature>
+            </Features>
+        </Module>
+
+        <Module id="MOD-005" name="Finance &amp; Reports" file="finance.html">
+            <Description>Financial monitoring and business reporting.</Description>
+            <Features>
+                <Feature id="F-501">Expense vs Revenue Tracking</Feature>
+                <Feature id="F-502">Profitability Analytics</Feature>
+            </Features>
+        </Module>
+
+        <Module id="MOD-006" name="User Management" file="users.html">
+            <Description>Role-based access control and staff management.</Description>
+        </Module>
+
+        <Module id="MOD-007" name="Activity Logging" file="activity.html">
+            <Description>System-wide audit trail of all actions.</Description>
+        </Module>
+    </Modules>
+
+    <DataEntities>
+        <Entity name="Product">
+            <Attributes>id, name, category, price, cost, stock, sold, image, incomingStock</Attributes>
+        </Entity>
+        <Entity name="Order">
+            <Attributes>id, customerName, date, totalAmount, status, items</Attributes>
+        </Entity>
+        <Entity name="Customer">
+            <Attributes>id, name, email, phone, totalSpent, ordersCount</Attributes>
+        </Entity>
+        <Entity name="Supplier">
+            <Attributes>id, company, contact, category, leadTime</Attributes>
+        </Entity>
+    </DataEntities>
+
+    <Workflows>
+        <Workflow id="WF-01" name="Sales Process">
+            <Step order="1">Identify products in POS</Step>
+            <Step order="2">Process Payment</Step>
+            <Step order="3">Deduct items from Inventory</Step>
+            <Step order="4">Create Order Record</Step>
+            <Step order="5">Update Activity Log</Step>
+        </Workflow>
+        <Workflow id="WF-02" name="Restock Process">
+            <Step order="1">Detect Low Stock Alert</Step>
+            <Step order="2">Place Re-order with Supplier</Step>
+            <Step order="3">Mark as Incoming Stock</Step>
+            <Step order="4">Receive Goods (Mark Arrived)</Step>
+            <Step order="5">Add units to Inventory</Step>
+        </Workflow>
+    </Workflows>
+</SystemDefinition>

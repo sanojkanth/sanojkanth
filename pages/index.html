@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hardware Admin Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+    <link rel="shortcut icon" href="../images/favicon.svg" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/alerts.css" />
+    <link rel="stylesheet" href="../css/dashboard_design.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/dark-mode.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+<body>
+    <!-- Mobile Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- Section: Mobilesidebar -->
+    <aside class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="user-profile-mobile">
+                <img src="../images/logo-icon.png" class="mobile-user-avatar" id="mobile-user-img">
+                <div class="mobile-user-info">
+                    <span id="mobile-user-name">Admin</span>
+                    <small id="mobile-user-role">Administrator</small>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close-sidebar" id="closeSidebar"></i>
+        </div>
+        <div class="mobile-sidebar-body">
+            <ul class="mobile-nav-list">
+                <li class="active"><a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-box"></i> Inventory</a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-file-invoice"></i> Orders</a></li>
+                <li><a href="invoices.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a></li>
+                <li><a href="finance.html"><i class="fa-solid fa-coins"></i> Finance</a></li>
+                <li><a href="suppliers.html"><i class="fa-solid fa-truck-field"></i> Suppliers</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a></li>
+
+                <li><a href="customers.html"><i class="fa-solid fa-user-group"></i> Customers</a></li>
+                <li><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+                <li><a href="activity.html"><i class="fa-solid fa-chart-line"></i> Activity</a></li>
+            </ul>
+        </div>
+        <div class="mobile-sidebar-footer">
+            <button class="btn-primary" style="width: 100%;" onclick="window.logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container-wrapper">
+            <div class="top-left top-left-layout">
+                <p class="top-info-p date-pill-style">
+                    <span id="srilanka-date-time" class="datetime-text">Today: ---</span>
+                </p>
+                <span id="top-bar-user-greeting" class="welcome-message-text">Welcome</span>
+            </div>
+            <div class="top-right">
+                <a href="activity.html">Activity Login</a>
+                <span class="location-text"><i class="fa-solid fa-location-dot text-danger margin-r-5"></i> Jaffna, Main St.</span>
+                <a href="#" class="admin-link"><strong>Admin</strong></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <div class="main-header">
+        <div class="container-wrapper header-flex">
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            
+            <!-- Logo -->
+            <a href="index.html" class="logo-area">
+                <img src="../images/logo-icon.png" alt="Central Hardwares" class="system-logo-icon">
+                <div class="logo-text">
+                    <h2>Central</h2>
+                    <span>HARDWARES</span>
+                </div>
+            </a>
+
+            <!-- Search Bar (Clock + Sales Pulse) -->
+            <div class="header-search header-search-bar">
+                <div class="clock-container">
+                    <div class="clock-block">
+                        <span id="c-hours" class="clock-time">--</span>
+                        <span class="clock-label">Hours</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-mins" class="clock-time">--</span>
+                        <span class="clock-label">Mins</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-secs" class="clock-time">--</span>
+                        <span class="clock-label">Secs</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-session" class="clock-time">--</span>
+                        <span class="clock-label">Session</span>
+                    </div>
+                </div>
+
+                <!-- Low Stock Widget -->
+                <a href="inventory.html" class="low-stock-widget severity-ok">
+                    <div class="stock-warning-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="stock-info">
+                        <span id="low-stock-count-header">0</span>
+                        <p>Items Critically Low</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Icons -->
+            <div class="header-icons">
+                <!-- Notification Bell -->
+                <div class="icon-item" id="notification-bell" onclick="toggleNotifications()">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Alerts</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='admin.html'">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Admin</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='activity.html'">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Activity</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='reports.html'">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    <span>Report</span>
+                </div>
+                <div class="icon-item dark-mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fa-solid fa-moon"></i>
+                    <span>Dark</span>
+                </div>
+                <div class="icon-item settings-icon" onclick="window.location.href='account.html'">
+                    <i class="fa-solid fa-gear" style="color: #f97316;"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="icon-item logout-btn-header" onclick="window.logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span style="color: #ef4444;">Logout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+      <div class="container-wrapper nav-flex">
+        <!-- Section: Depttoggle -->
+        <div class="dept-btn" id="deptToggle">
+          <i class="fa-solid fa-border-all"></i>
+          <span>ALL DEPARTMENTS</span>
+        </div>
+
+        <div class="nav-stats animate-reveal delay-1">
+          <div class="nav-stat-item">
+            <span>Total Sales</span>
+            <span>LKR <span class="counter" id="nav-total-sales">0</span></span>
+          </div>
+          <div class="nav-stat-item">
+            <span>Orders</span>
+            <span class="counter" id="nav-orders-count">0</span>
+          </div>
+          <div class="nav-stat-item">
+            <span>Stock</span>
+            <span class="counter" id="nav-stock-count">0</span>
+          </div>
+          <div class="nav-stat-item">
+            <span>Customers</span>
+            <span class="counter" id="nav-customers-count">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="container-wrapper main-layout">
+      <!-- Sidebar (Categories Style) -->
+      <div id="sidebar-container"></div>
+
+      <!-- Main Content Area -->
+      <div class="content-area fadeIn animate-reveal delay-2">
+        <!-- Dashboard Widgets -->
+        <div class="dashboard-header">
+          <h2>Dashboard Overview</h2>
+          <!-- Section: Dashboard Date Display -->
+          <div class="date_picker" id="dashboard-date-display">Loading...</div>
+        </div>
+
+        <!-- Stats Cards -->
+        <!-- Stats Grid Removed (Moved to Nav Bar) -->
+
+        <!-- Analytics Row: Recent Orders & Low Stock Alerts -->
+        <div class="grid-2-col animate-reveal delay-3">
+          <div class="chart-card premium-card">
+            <div class="flex-center justify-between mb-15">
+              <h3 class="m-0">Recent Orders</h3>
+              <a href="orders.html" class="text-sm text-primary text-semibold"
+                >View All</a
+              >
+            </div>
+            <div class="table-clean">
+              <table class="text-sm">
+                <thead>
+                  <tr>
+                    <th style="width: 60px;">#</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-right">Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-orders-list">
+                  <tr>
+                    <td colspan="3" class="text-center text-muted" style="padding: 50px 0;">
+                      <i class="fa-solid fa-spinner fa-spin"></i> Loading last 5 orders...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="chart-card alert-card premium-card">
+            <div class="alert-card-header">
+              <div class="alert-title-group">
+                <i class="fa-solid fa-triangle-exclamation text-warning"></i>
+                <h3>Low Stock Alerts</h3>
+              </div>
+              <a href="inventory.html" class="alert-link-action">Go to Inventory</a>
+            </div>
+            <!-- Section: Low Stock List -->
+            <div id="low-stock-list">
+              <!-- Live alerts will be injected here via script.js -->
+              <div class="loading-placeholder text-center text-muted pt-50">
+                <i class="fa-solid fa-spinner fa-spin"></i> Loading alerts...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analytics Row Removed -->
+
+        <!-- Profit Calculator -->
+        <div class="widget-card mt-20">
+          <div class="widget-header-row">
+            <h3><i class="fa-solid fa-calculator"></i> Profit Calculator</h3>
+          </div>
+          <div class="calc-grid">
+            <div class="input-group">
+              <label>Product</label>
+              <select id="profit-product" title="Select Product">
+                <option value="">Select a product...</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label>Cost Price</label>
+              <input
+                type="number"
+                id="profit-cost"
+                readonly
+                placeholder="Auto-filled"
+                title="Cost Price"
+              />
+            </div>
+            <div class="input-group">
+              <label>Selling Price</label>
+              <input
+                type="number"
+                id="profit-sell"
+                readonly
+                placeholder="Auto-filled"
+                title="Selling Price"
+              />
+            </div>
+            <div class="input-group">
+              <label>Quantity</label>
+              <input
+                type="number"
+                id="profit-qty"
+                value="1"
+                min="1"
+                oninput="calculateProfit()"
+                title="Quantity"
+              />
+            </div>
+          </div>
+          <div class="result-row">
+            <div class="result-item">
+              <span>Profit/Unit</span>
+              <strong id="profit-per-unit">LKR 0</strong>
+            </div>
+            <div class="result-item">
+              <span>Margin</span>
+              <strong id="profit-margin">0%</strong>
+            </div>
+            <div class="result-item highlight">
+              <span>Total Profit</span>
+              <strong id="profit-total">LKR 0</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Re-order Supplier Modal -->
+    <div id="reorder-modal" class="modal">
+      <div class="modal-content" style="max-width: 400px">
+        <div class="modal-header">
+          <h3>Select Supplier</h3>
+          <span class="close-btn" onclick="closeReorderModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+          <p class="mb-15">
+            Choose a supplier and specify the quantity to re-order.
+          </p>
+          <div class="form-group">
+            <label>Supplier</label>
+            <select id="reorder-supplier-select">
+              <!-- Suppliers will be injected here -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Re-order Quantity</label>
+            <input
+              type="number"
+              id="reorder-quantity"
+              min="10"
+              value="50"
+              placeholder="Enter quantity (min: 10)"
+            />
+            <small class="text-muted text-xs">Minimum order: 10 units</small>
+          </div>
+          <input type="hidden" id="reorder-product-id" />
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" onclick="closeReorderModal()">
+            Cancel
+          </button>
+          <button class="btn-primary" onclick="confirmReorder()">
+            Confirm Re-order
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/utils.js?v=2026-new"></script>
+    <script src="../js/rbac.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/dashboard-analytics.js"></script>
+  </body>
+</html>

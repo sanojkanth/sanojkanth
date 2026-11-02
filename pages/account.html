@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings - Central Hardwares</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+    <link rel="shortcut icon" href="../images/favicon.svg" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/admin.css">
+
+    <style>
+        /* ── Admin-only banner ── */
+        .settings-access-banner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .settings-access-banner.is-admin {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1.5px solid rgba(34, 197, 94, 0.3);
+            color: #16a34a;
+        }
+        .settings-access-banner.not-admin {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1.5px solid rgba(239, 68, 68, 0.25);
+            color: #dc2626;
+        }
+        .settings-access-banner i { font-size: 1.1rem; }
+
+        /* ── Readonly overlay for non-admins ── */
+        .settings-readonly-mode fieldset {
+            pointer-events: none;
+            opacity: 0.65;
+        }
+        .settings-readonly-mode .form-actions { display: none !important; }
+
+        .backup-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 20px;
+        }
+        .backup-actions .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .backup-actions .btn-outline {
+            padding: 14px 24px;
+            border-radius: 10px;
+            border: 1.5px solid #dbe4ee;
+            background: #fff;
+            color: #334155;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .backup-actions .btn-outline:hover {
+            border-color: #cbd5e1;
+            background: #f8fafc;
+        }
+        .backup-status {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            color: #475569;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+        .backup-status strong {
+            color: #1e293b;
+        }
+        body.dark-mode .backup-actions .btn-outline {
+            background: #1e293b;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+        body.dark-mode .backup-actions .btn-outline:hover {
+            background: #243244;
+        }
+        body.dark-mode .backup-status {
+            background: rgba(15, 23, 42, 0.9);
+            border-color: #334155;
+            color: #cbd5e1;
+        }
+        body.dark-mode .backup-status strong {
+            color: #f8fafc;
+        }
+    </style>
+</head>
+<body class="account-page">
+    <!-- Mobile Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- Section: Mobilesidebar -->
+    <aside class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="user-profile-mobile">
+                <img src="../images/logo-icon.png" class="mobile-user-avatar" id="mobile-user-img">
+                <div class="mobile-user-info">
+                    <span id="mobile-user-name">Admin</span>
+                    <small id="mobile-user-role">Administrator</small>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close-sidebar" id="closeSidebar"></i>
+        </div>
+        <div class="mobile-sidebar-body">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-box"></i> Inventory</a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-file-invoice"></i> Orders</a></li>
+                <li><a href="invoices.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a></li>
+                <li><a href="finance.html"><i class="fa-solid fa-coins"></i> Finance</a></li>
+                <li><a href="suppliers.html"><i class="fa-solid fa-truck-field"></i> Suppliers</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a></li>
+                <li><a href="customers.html"><i class="fa-solid fa-user-group"></i> Customers</a></li>
+                <li><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+                <li><a href="activity.html"><i class="fa-solid fa-chart-line"></i> Activity</a></li>
+            </ul>
+        </div>
+        <div class="mobile-sidebar-footer">
+            <button class="btn-primary" style="width: 100%;" onclick="window.logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container-wrapper">
+            <div class="top-left top-left-layout">
+                <p class="top-info-p date-pill-style">
+                    <span id="srilanka-date-time" class="datetime-text">Today: ---</span>
+                </p>
+                <span id="top-bar-user-greeting" class="welcome-message-text">Welcome</span>
+            </div>
+            <div class="top-right">
+                <a href="activity.html">Activity Login</a>
+                <span class="location-text"><i class="fa-solid fa-location-dot text-danger margin-r-5"></i> Jaffna, Main St.</span>
+                <a href="#" class="admin-link"><strong>Admin</strong></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <div class="main-header">
+                <div class="container-wrapper header-flex">
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Logo -->
+            <a href="index.html" class="logo-area">
+                <img src="../images/logo-icon.png" alt="Central Hardwares" class="system-logo-icon">
+                <div class="logo-text">
+                    <h2>Central</h2>
+                    <span>HARDWARES</span>
+                </div>
+            </a>
+
+            <!-- Search Bar (Clock + Sales Pulse) -->
+            <div class="header-search header-search-bar">
+                <div class="clock-container">
+                    <div class="clock-block">
+                        <span id="c-hours" class="clock-time">--</span>
+                        <span class="clock-label">Hours</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-mins" class="clock-time">--</span>
+                        <span class="clock-label">Mins</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-secs" class="clock-time">--</span>
+                        <span class="clock-label">Secs</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-session" class="clock-time">--</span>
+                        <span class="clock-label">Session</span>
+                    </div>
+                </div>
+
+                <!-- Low Stock Widget -->
+                <a href="inventory.html" class="low-stock-widget severity-ok">
+                    <div class="stock-warning-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="stock-info">
+                        <span id="low-stock-count-header">0</span>
+                        <p>Items Critically Low</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Icons -->
+            <div class="header-icons">
+                <!-- Notification Bell -->
+                <div class="icon-item" id="notification-bell" onclick="toggleNotifications()">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Alerts</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='admin.html'">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Admin</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='activity.html'">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Activity</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='reports.html'">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    <span>Report</span>
+                </div>
+                <div class="icon-item dark-mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fa-solid fa-moon"></i>
+                    <span>Dark</span>
+                </div>
+                <div class="icon-item settings-icon" onclick="window.location.href='account.html'">
+                    <i class="fa-solid fa-gear" style="color: #f97316;"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="icon-item logout-btn-header" onclick="window.logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span style="color: #ef4444;">Logout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <div class="container-wrapper nav-flex">
+            <!-- Section: Depttoggle -->
+            <div class="dept-btn" id="deptToggle">
+                <i class="fa-solid fa-border-all"></i>
+                <span>MENU</span>
+            </div>
+            <div class="nav-stats animate-reveal delay-1">
+                <div class="nav-stat-item">
+                    <span>Security</span>
+                    <span id="nav-acc-security" class="text-success">High</span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>Theme</span>
+                    <span id="nav-acc-theme">Modern</span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>Language</span>
+                    <span id="nav-acc-lang">English</span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>Storage</span>
+                    <span class="counter" id="nav-acc-storage">85</span>%
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Layout -->
+    <div class="container-wrapper settings-main-layout">
+        
+        <!-- Sidebar Widget -->
+        <aside class="sidebar-widget" id="sidebar">
+            <div class="widget-header">
+                <h3>Admin Menu</h3>
+            </div>
+            <ul class="cat-list">
+                <li><a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-box"></i> Inventory</a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-file-invoice"></i> Orders</a></li>
+                <li><a href="invoices.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-truck"></i> Services &amp; Delivery</a></li>
+                <li><a href="finance.html"><i class="fa-solid fa-coins"></i> Finance</a></li>
+                <li><a href="suppliers.html"><i class="fa-solid fa-truck-field"></i> Suppliers</a></li>
+                <li><a href="customers.html"><i class="fa-solid fa-user-group"></i> Customers</a></li>
+                <li><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+                <li><a href="activity.html"><i class="fa-solid fa-clipboard-list"></i> Activity</a></li>
+            </ul>
+        </aside>
+
+        <!-- Content Section -->
+        <div class="settings-content-wrapper fadeIn">
+            <div class="profile-container">
+                <!-- Section: Settingsbody -->
+                <div class="profile-body settings-body" id="settingsBody">
+
+                    <!-- Page Title -->
+                    <div class="settings-title">
+                        <i class="fa-solid fa-gears"></i>
+                        <h2>System Settings</h2>
+                    </div>
+
+                    <!-- Access Banner (filled by JS) -->
+                    <div id="accessBanner" class="settings-access-banner" style="display:none;"></div>
+
+                    <form id="settingsForm">
+                        <fieldset id="settingsFieldset" style="border:none; padding:0; margin:0;">
+
+                            <!-- Section 1: Store Information -->
+                            <div class="form-section">
+                                <div class="form-section-title">
+                                    <i class="fa-solid fa-shop"></i> Store Information
+                                </div>
+                                <div class="settings-grid">
+                                    <div class="form-group">
+                                        <label>Business Name</label>
+                                        <div class="form-control-wrap">
+                                            <i class="fa-solid fa-building"></i>
+                                            <input type="text" id="set-store-name" class="profile-input" placeholder="Business display name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Branch / Location</label>
+                                        <div class="form-control-wrap">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                            <input type="text" id="set-location" class="profile-input" placeholder="Primary operating location">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Contact Email</label>
+                                        <div class="form-control-wrap">
+                                            <i class="fa-solid fa-envelope"></i>
+                                            <input type="email" id="set-email" class="profile-input" placeholder="Official contact email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Contact Phone</label>
+                                        <div class="form-control-wrap">
+                                            <i class="fa-solid fa-phone"></i>
+                                            <input type="tel" id="set-phone" class="profile-input" placeholder="Primary contact number">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section 2: Security - Password Change -->
+                            <div class="form-section">
+                                <div class="form-section-title">
+                                    <i class="fa-solid fa-shield-halved"></i> Security
+                                </div>
+                                <p class="form-hint">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    Update your password to keep your account safe.
+                                </p>
+                                <div class="settings-grid">
+                                    <div class="form-group" style="grid-column: 1 / -1;">
+                                        <label>New Password</label>
+                                        <div class="form-control-wrap">
+                                            <i class="fa-solid fa-lock"></i>
+                                            <input type="password" id="set-new-password" class="profile-input" placeholder="Enter new password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="grid-column: 1 / -1;">
+                                        <label>Confirm Password</label>
+                                        <div class="form-control-wrap">
+                                            <i class="fa-solid fa-lock"></i>
+                                            <input type="password" id="set-confirm-password" class="profile-input" placeholder="Re-enter password">
+                                        </div>
+                                    </div>
+                                    <div style="grid-column: 1 / -1; font-size: 0.9rem; color: #666; margin-top: -12px;">
+                                        <i class="fa-solid fa-info-circle text-info" style="color: #3b82f6; margin-right: 6px;"></i>
+                                        Leave blank to keep your current password
+                                    </div>
+                                </div>
+                                <div style="margin-top: 16px;">
+                                    <button type="button" class="btn-primary" id="changePasswordBtn" style="width: auto;">
+                                        <i class="fa-solid fa-check"></i> Update Password
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Section 3: System Preferences -->
+                            <div class="form-section">
+                                <div class="form-section-title">
+                                    <i class="fa-solid fa-sliders"></i> System Preferences
+                                </div>
+                                <div class="settings-grid">
+                                    <div class="form-group">
+                                        <label>Base Currency</label>
+                                        <div class="form-control-wrap">
+                                            <i class="fa-solid fa-money-bill-wave"></i>
+                                            <select id="set-currency" class="profile-input" title="Base currency used in the system">
+                                                <option value="LKR">Sri Lankan Rupee (LKR)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Default Tax Rate (%)</label>
+                                        <div class="form-control-wrap">
+                                            <i class="fa-solid fa-percent"></i>
+                                            <input type="number" id="set-tax-rate" step="0.1" min="0" max="100" class="profile-input" placeholder="0">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Low Stock Alert Threshold</label>
+                                        <div class="form-control-wrap">
+                                            <i class="fa-solid fa-triangle-exclamation"></i>
+                                            <input type="number" id="set-stock-threshold" min="1" class="profile-input" placeholder="15">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Expense Approval Threshold (LKR)</label>
+                                        <div class="form-control-wrap">
+                                            <i class="fa-solid fa-shield-halved"></i>
+                                            <input type="number" id="set-expense-threshold" min="0" step="0.01" class="profile-input" placeholder="50000">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <div class="form-section-title">
+                                    <i class="fa-solid fa-database"></i> Backup &amp; Restore
+                                </div>
+                                <p class="form-hint">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    Export the full system as a backup file or restore a previous backup safely. Restoring will replace current data across all pages.
+                                </p>
+                                <div class="backup-actions">
+                                    <button type="button" class="btn-primary" id="downloadBackupBtn">
+                                        <i class="fa-solid fa-download"></i> Download Full Backup
+                                    </button>
+                                    <button type="button" class="btn-outline" id="restoreBackupBtn">
+                                        <i class="fa-solid fa-upload"></i> Restore Backup File
+                                    </button>
+                                    <input type="file" id="restoreBackupInput" accept=".json,application/json" hidden>
+                                </div>
+                                <!-- Section: Backupstatustext -->
+                                <div class="backup-status" id="backupStatusText">
+                                    <strong>Admin only:</strong> use backup before major changes so you can restore inventory, finance, services, users, settings, and activity history from one file.
+                                </div>
+                            </div>
+
+                        </fieldset>
+
+                        <!-- Save Button (hidden for non-admins via JS) -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary" id="saveSettingsBtn">
+                                <i class="fa-solid fa-check"></i> Save Settings
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/rbac.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/account.js"></script>
+
+</body>
+</html>

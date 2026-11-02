@@ -1,0 +1,191 @@
+/* ========================
+   DASHBOARD WIDGET PREMIUM STYLES
+   ======================== */
+
+.widget-card {
+    background: transparent;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: none;
+    border: none;
+}
+
+.widget-header-row h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- REVENUE WIDGET --- */
+
+.stat-boxes {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.stat-box {
+    flex: 1;
+    padding: 20px;
+    border-radius: 12px;
+    background: #f8fafc; /* Default light gray */
+    transition: all 0.3s;
+}
+
+.stat-box.highlight {
+    background: #fffbeb; /* Light yellow background */
+    border: 1px solid #fcd34d; /* Yellow border */
+}
+
+.stat-box .label {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.stat-box .value {
+    font-size: 1.7rem; /* Larger font */
+    font-weight: 800;
+    color: #1e293b;
+    display: block;
+    line-height: 1.2;
+}
+
+.stat-box.highlight .value {
+    color: #0f172a;
+}
+
+.stat-box .change {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.stat-box .change.up {
+    color: #10b981; /* Success Green */
+}
+
+/* Chart Area */
+.chart-area {
+    margin-top: 20px;
+}
+
+
+/* --- RECENT SALES WIDGET --- */
+.dot-live {
+    width: 8px;
+    height: 8px;
+    background: #f59e0b; /* Amber/Orange */
+    border-radius: 50%;
+     display: inline-block;
+}
+
+.sales-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.sale-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: #f8fafc; /* Very light background for items */
+    border-radius: 12px;
+    border-left: 4px solid #10b981; /* Green accent bar */
+    transition: transform 0.2s;
+}
+
+.sale-item:hover {
+    transform: translateX(4px);
+    background: #f1f5f9;
+}
+
+.sale-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.sale-info i {
+    width: 42px;
+    height: 42px;
+    background: #dcfce7; /* Light green icon bg */
+    color: #10b981;    /* Green icon */
+    border-radius: 10px;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sale-info strong {
+    font-size: 0.95rem;
+    color: #0f172a;
+    display: block;
+}
+
+.sale-info span {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.sale-amount {
+    text-align: right;
+}
+
+.sale-amount strong {
+    font-size: 1rem;
+    color: #10b981; /* Green amount */
+    font-weight: 700;
+}
+
+.sale-amount span {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    display: block;
+    margin-top: 2px;
+}
+
+/* Bottom Stats (Footer) */
+.bottom-stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 25px;
+    padding-top: 0;
+    border-top: none; 
+}
+
+.bottom-stat {
+    flex: 1;
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.bottom-stat span {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.bottom-stat strong {
+    font-size: 1.4rem;
+    color: #1e293b;
+    display: block;
+    margin-top: 5px;
+}

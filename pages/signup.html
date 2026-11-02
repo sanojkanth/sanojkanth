@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Central Hardwares</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+    <link rel="shortcut icon" href="../images/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="auth-body">
+
+    <div class="auth-card fadeIn">
+        <a href="index.html" class="logo-area auth-logo">
+            <img src="../images/logo-icon.png" alt="Central Hardwares" class="system-logo-icon">
+            <div class="logo-text">
+                <h2>Central</h2>
+                <span>HARDWARES</span>
+            </div>
+        </a>
+        <h2>Create Account</h2>
+        <p>Join as a new administrator</p>
+
+        <form id="signupForm">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="signup-name" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="signup-email" placeholder="admin@example.com" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="signup-password" placeholder="Create a password" required minlength="4">
+            </div>
+            <!-- Section: Signup Error -->
+            <div id="signup-error" class="login-error-msg"></div>
+            <button type="submit" class="btn-auth" id="signup-btn">Sign Up</button>
+        </form>
+
+        <div class="auth-links">
+            <p>Already have an account? <a href="login.html">Login</a></p>
+        </div>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script>
+        // Inverse guard
+        if (localStorage.getItem('currentUser')) {
+            window.location.href = 'index.html';
+        }
+        
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('signup-name').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const password = document.getElementById('signup-password').value;
+            const errorEl = document.getElementById('signup-error');
+            const btn = document.getElementById('signup-btn');
+
+            errorEl.style.display = 'none';
+
+            // Validate email
+            if (!Utils.validateEmail(email)) {
+                errorEl.innerHTML = `<i class="fa-solid fa-circle-xmark" style="margin-right: 8px;"></i> <strong>ERROR</strong> &nbsp; Please enter a valid email address.`;
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Creating account...';
+
+            setTimeout(async function() {
+                try {
+                    const res = await fetch('../backend php/auth.php?action=signup', {
+                        method: 'POST',
+                        credentials: 'include',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, email, password })
+                    });
+                    const data = await res.json();
+                    
+                    if (data.success) {
+                        alert('Account created successfully! Please login.');
+                        window.location.href = 'login.html';
+                    } else {
+                        errorEl.innerHTML = `<i class="fa-solid fa-circle-xmark" style="margin-right: 8px;"></i> <strong>ERROR</strong> &nbsp; ${data.error}`;
+                        errorEl.style.display = 'block';
+                        btn.disabled = false;
+                        btn.textContent = 'Sign Up';
+                    }
+                } catch(err) {
+                    console.error("Signup fetch error:", err);
+                    let errMsg = err.message;
+                    if (window.location.protocol === 'file:') {
+                        errMsg = "Cannot run PHP API from a file:// URL. Please access via http://localhost/";
+                    }
+                    errorEl.innerHTML = `<i class="fa-solid fa-circle-xmark" style="margin-right: 8px;"></i> <strong>ERROR</strong> &nbsp; ${errMsg}`;
+                    errorEl.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'Sign Up';
+                }
+            }, 600);
+        });
+    </script>
+</body>
+</html>

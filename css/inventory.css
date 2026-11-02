@@ -1,0 +1,32 @@
+/* Reverted inventory page styling to rely on the shared site design. */
+
+.bulk-actions-bar {
+    display: none !important;
+}
+
+@media print {
+    .top-bar,
+    .main-header,
+    .nav-bar,
+    .sidebar-widget,
+    .dashboard-header,
+    .inventory-toolbar,
+    .summary-cards,
+    .pagination-container,
+    .action-btns,
+    #inventory-table th:last-child,
+    #inventory-table td:last-child {
+        display: none !important;
+    }
+
+    body,
+    html {
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    #inventory-table {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+}

@@ -1,0 +1,151 @@
+/* ================== 
+   LOW STOCK ALERTS 
+   ================== */
+
+/* Card Header */
+.alert-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 18px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.alert-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-title-group i {
+    font-size: 1.3rem;
+    color: #f59e0b;
+}
+
+.alert-title-group h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.alert-link-action {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.alert-link-action:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+/* Scrollable List */
+#low-stock-list {
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Custom Scrollbar */
+#low-stock-list::-webkit-scrollbar { width: 6px; }
+#low-stock-list::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+#low-stock-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+#low-stock-list::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Row Layout */
+.alert-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 4px; /* More compact */
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.2s ease;
+    gap: 12px;
+}
+
+.alert-item:last-child {
+    border-bottom: none;
+}
+
+.alert-item:hover {
+    background-color: #fafbfc;
+}
+
+/* Product Name */
+.alert-name {
+    flex: 1;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+/* Stock Badge */
+.alert-badge {
+    background-color: #fee2e2;
+    color: #dc2626;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 12px;
+    white-space: nowrap;
+    margin: 0 10px;
+    flex-shrink: 0;
+}
+
+.btn-reorder {
+    background: #fff;
+    border: 1px solid #2563eb;
+    color: #2563eb;
+    padding: 6px 15px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-reorder:hover {
+    background: #2563eb;
+    color: #fff;
+}
+
+.btn-reorder:hover {
+    background-color: #2563eb;
+    color: #fff;
+    border-color: #2563eb;
+}
+
+.btn-reorder i {
+    font-size: 1.1rem;
+}
+
+/* Empty State */
+.empty-alert-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #64748b;
+}
+
+.empty-alert-icon {
+    font-size: 2.5rem;
+    color: #10b981;
+    margin-bottom: 15px;
+    display: block;
+    opacity: 0.8;
+}
+
+.empty-alert-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+

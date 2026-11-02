@@ -1,0 +1,146 @@
+/* ===== AUTH PAGES — Clean & Minimal ===== */
+
+.auth-body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f0f2f5;
+}
+
+/* ---- Card ---- */
+.auth-card {
+    background: #fff;
+    padding: 40px 36px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeUp .45s ease;
+}
+
+.auth-card h2 {
+    color: #1e293b;
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.auth-card p {
+    color: #94a3b8;
+    font-size: .85rem;
+    margin-bottom: 28px;
+}
+
+/* ---- Logo ---- */
+.auth-logo {
+    justify-content: center;
+    margin-bottom: 24px;
+    text-decoration: none;
+}
+
+.auth-logo .logo-text { text-align: left; }
+
+/* ---- Form ---- */
+.form-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: .8rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: .9rem;
+    color: #1e293b;
+    background: #f8fafc;
+    box-sizing: border-box;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #1e293b;
+    box-shadow: 0 0 0 3px rgba(30,41,59,.07);
+    background: #fff;
+}
+
+/* ---- Button ---- */
+.btn-auth {
+    width: 100%;
+    padding: 11px;
+    background: #1e293b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: .95rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background .2s, transform .15s;
+}
+
+.btn-auth:hover {
+    background: #0f172a;
+    transform: translateY(-1px);
+}
+
+.btn-auth:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ---- Links ---- */
+.auth-links {
+    margin-top: 22px;
+    font-size: .85rem;
+    color: #64748b;
+}
+
+.auth-links a {
+    color: #1e293b;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-links a:hover { text-decoration: underline; }
+
+.divider {
+    margin: 16px 0;
+    height: 1px;
+    background: #e2e8f0;
+}
+
+.auth-footer-text { margin-bottom: 0; }
+
+/* ---- Error ---- */
+.login-error-msg {
+    color: #b91c1c;
+    background: #fef2f2;
+    padding: 9px 12px;
+    border-radius: 6px;
+    font-size: .82rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    display: none;
+    text-align: left;
+    border: 1px solid #fecaca;
+}
+
+/* ---- Animation ---- */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

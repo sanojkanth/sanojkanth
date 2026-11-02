@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services & Delivery - Hardware Admin</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+    <link rel="shortcut icon" href="../images/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/services.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    <!-- Mobile Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- Section: Mobilesidebar -->
+    <aside class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="user-profile-mobile">
+                <img src="../images/logo-icon.png" class="mobile-user-avatar" id="mobile-user-img">
+                <div class="mobile-user-info">
+                    <span id="mobile-user-name">Admin</span>
+                    <small id="mobile-user-role">Administrator</small>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close-sidebar" id="closeSidebar"></i>
+        </div>
+        <div class="mobile-sidebar-body">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-box"></i> Inventory</a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-file-invoice"></i> Orders</a></li>
+                <li><a href="invoices.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a></li>
+                <li><a href="finance.html"><i class="fa-solid fa-coins"></i> Finance</a></li>
+                <li><a href="suppliers.html"><i class="fa-solid fa-truck-field"></i> Suppliers</a></li>
+                <li class="active"><a href="services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a></li>
+                <li><a href="customers.html"><i class="fa-solid fa-user-group"></i> Customers</a></li>
+                <li><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+                <li><a href="activity.html"><i class="fa-solid fa-chart-line"></i> Activity</a></li>
+            </ul>
+        </div>
+        <div class="mobile-sidebar-footer">
+            <button class="btn-primary" style="width: 100%;" onclick="window.logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container-wrapper">
+            <div class="top-left top-left-layout">
+                <p class="top-info-p date-pill-style">
+                    <span id="srilanka-date-time" class="datetime-text">Today: ---</span>
+                </p>
+                <span id="top-bar-user-greeting" class="welcome-message-text">Welcome</span>
+            </div>
+            <div class="top-right">
+                <a href="activity.html">Activity Login</a>
+                <span class="location-text"><i class="fa-solid fa-location-dot text-danger margin-r-5"></i> Jaffna, Main St.</span>
+                <a href="#" class="admin-link"><strong>Admin</strong></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <div class="main-header">
+        <div class="container-wrapper header-flex">
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Logo -->
+            <a href="index.html" class="logo-area">
+                <img src="../images/logo-icon.png" alt="Central Hardwares" class="system-logo-icon">
+                <div class="logo-text">
+                    <h2>Central</h2>
+                    <span>HARDWARES</span>
+                </div>
+            </a>
+
+            <!-- Search Bar (Clock + Sales Pulse) -->
+            <div class="header-search header-search-bar">
+                <div class="clock-container">
+                    <div class="clock-block">
+                        <span id="c-hours" class="clock-time">--</span>
+                        <span class="clock-label">Hours</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-mins" class="clock-time">--</span>
+                        <span class="clock-label">Mins</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-secs" class="clock-time">--</span>
+                        <span class="clock-label">Secs</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-session" class="clock-time">--</span>
+                        <span class="clock-label">Session</span>
+                    </div>
+                </div>
+
+                <!-- Low Stock Widget -->
+                <a href="inventory.html" class="low-stock-widget severity-ok">
+                    <div class="stock-warning-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="stock-info">
+                        <span id="low-stock-count-header">0</span>
+                        <p>Items Critically Low</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Icons -->
+            <div class="header-icons">
+                <!-- Notification Bell -->
+                <div class="icon-item" id="notification-bell" onclick="toggleNotifications()">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Alerts</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='admin.html'">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Admin</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='activity.html'">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Activity</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='reports.html'">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    <span>Report</span>
+                </div>
+                <div class="icon-item dark-mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fa-solid fa-moon"></i>
+                    <span>Dark</span>
+                </div>
+                <div class="icon-item settings-icon" onclick="window.location.href='account.html'">
+                    <i class="fa-solid fa-gear" style="color: #f97316;"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="icon-item logout-btn-header" onclick="window.logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span style="color: #ef4444;">Logout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <div class="container-wrapper nav-flex">
+            <!-- Section: Depttoggle -->
+            <div class="dept-btn" id="deptToggle">
+                <i class="fa-solid fa-border-all"></i>
+                <span>ALL DEPARTMENTS</span>
+            </div>
+            
+            <!-- Section: Nav Stats Records -->
+            <div class="nav-stats animate-reveal delay-1" id="nav-stats-records">
+                <div class="nav-stat-item">
+                    <span>ACTIVE REPAIRS</span>
+                    <span class="counter" id="nav-svc-repairs">0</span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>PENDING DELIVERY</span>
+                    <span class="counter" id="nav-svc-delivery">0</span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>INSTALLATIONS</span>
+                    <span class="counter" id="nav-svc-install">0</span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>COMPLETED</span>
+                    <span class="counter" id="nav-svc-done">0</span>
+                </div>
+            </div>
+
+            <!-- Field Operations Specific Stats -->
+            <div class="nav-stats animate-reveal delay-1 d-none" id="nav-stats-performance">
+                <div class="nav-stat-item">
+                    <span>TOTAL JOBS</span>
+                    <span class="counter" id="nav-perf-total">0</span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>AVG COMPLETION</span>
+                    <span class="counter" id="nav-perf-time">0 hrs</span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>AVG RATING</span>
+                    <span class="counter" id="nav-perf-rating">0 / 5</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-wrapper main-layout">
+        <!-- Section: Sidebar -->
+        <aside class="sidebar-widget" id="sidebar">
+            <div class="widget-header">
+                <h3>Admin Menu</h3>
+            </div>
+            <ul class="cat-list">
+                <li><a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-box"></i> Inventory</a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-file-invoice"></i> Orders</a></li>
+                
+
+                <li><a href="invoices.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a></li>
+                <li class="active" data-service-nav="records"><a href="services.html"><i class="fa-solid fa-truck"></i> Services & Delivery</a></li>
+                <li data-service-nav="performance"><a href="services.html?view=performance"><i class="fa-solid fa-chart-column"></i> Field Operations</a></li>
+                <li><a href="finance.html"><i class="fa-solid fa-coins"></i> Finance</a></li>
+                <li><a href="suppliers.html"><i class="fa-solid fa-truck-field"></i> Suppliers</a></li>
+                <li><a href="customers.html"><i class="fa-solid fa-user-group"></i> Customers</a></li>
+                <li><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+                <li><a href="activity.html"><i class="fa-solid fa-chart-line"></i> Activity</a></li>
+            </ul>
+        </aside>
+
+        <div class="content-area fadeIn">
+            <div class="dashboard-header">
+                <h2 id="services-page-title">Services & Delivery</h2>
+                <div class="header-actions header-actions-flex">
+                    <button id="header-personnel-btn" class="btn-secondary" onclick="openPersonnelModal()"><i class="fa-solid fa-user-group"></i> Personnel</button>
+                    <button id="header-queue-btn" class="btn-secondary" onclick="openQueueModal()"><i class="fa-solid fa-truck-ramp-box"></i> Queue</button>
+                    <button id="header-services-btn" class="btn-secondary d-none" onclick="closePerformanceModal()"><i class="fa-solid fa-arrow-left"></i> Services</button>
+                    <button id="header-performance-btn" class="btn-secondary" onclick="openPerformanceModal('dispatch')"><i class="fa-solid fa-chart-line"></i> Performance</button>
+                    <button class="btn-secondary" onclick="openHistoryModal()"><i class="fa-solid fa-clock-rotate-left"></i> History</button>
+                    <button class="btn-primary" onclick="openServiceModal()"><i class="fa-solid fa-plus"></i> New Request</button>
+                </div>
+            </div>
+
+            <!-- Section: Services Records View -->
+            <div id="services-records-view">
+            <!-- Toolbar -->
+            <div class="inventory-toolbar">
+                <!-- Section: Service Tabs -->
+                <div class="filter-tabs" id="service-tabs">
+                    <button class="active" onclick="filterServices('all')">ALL RECORDS</button>
+                    <button onclick="filterServices('Repair')">ACTIVE REPAIRS</button>
+                    <button onclick="filterServices('Delivery Only')">OUT FOR DELIVERY</button>
+                    <button onclick="filterServices('Installation')">INSTALLATIONS</button>
+                    <button onclick="filterWarranties()" class="btn-warranty-tab">
+                        <i class="fa-solid fa-screwdriver-wrench"></i> WARRANTY & MAINTENANCE
+                    </button>
+                </div>
+                <div class="search-wrap">
+                    <div class="toolbar-search-container">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="service-search" placeholder="Search services..." 
+                               title="Search services" aria-label="Search services">
+                    </div>
+                    <button class="btn-toolbar" onclick="exportServicesData()" title="Export service data"><i class="fa-solid fa-download"></i> EXPORT DATA</button>
+                    <button class="btn-toolbar" onclick="window.openReportPrintPreview('services-table', 'Services Report')" title="Print service records"><i class="fa-solid fa-print"></i> PRINT DATA</button>
+                    <!-- Section: Warranty Actions -->
+                    <div id="warranty-actions" class="d-none">
+                        <button class="btn-toolbar" onclick="openWarrantyModal()" title="Register new warranty">
+                            <i class="fa-solid fa-plus-circle"></i> REGISTER WARRANTY
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="services-grid-layout">
+                <div class="content-section">
+                    <!-- Original Services Table -->
+                    <div class="table-clean" id="services-table-container">
+                        <table id="services-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">#</th>
+                                    <th>Customer</th>
+                                    <th>Service Type</th>
+                                    <th>Priority</th>
+                                    <th>Service Status</th>
+                                    <th>Delivery Status</th>
+                                    <th>Driver / Staff</th>
+                                    <th class="text-right">Cost</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="service-table-body"></tbody>
+                        </table>
+                        <!-- Section: Services Pagination -->
+                        <div id="services-pagination" class="pagination-container"></div>
+                    </div>
+
+                    <!-- New Warranties Table (Hidden by default) -->
+                    <div class="table-clean d-none" id="warranties-table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">#</th>
+                                    <th>Product</th>
+                                    <th>Customer</th>
+                                    <th>Service Cycle</th>
+                                    <th>Next Service</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="warranty-table-body"></tbody>
+                        </table>
+                        <!-- Section: Warranties Pagination -->
+                        <div id="warranties-pagination" class="pagination-container"></div>
+                    </div>
+                </div>
+
+                <!-- Personnel & Queue Modal -->
+                <div id="field-personnel-modal" class="modal">
+                    <div class="modal-content max-w-450">
+                         <div class="modal-header modal-header-p15">
+                            <h3 class="font-size-1-1" id="personnel-modal-title"><i class="fa-solid fa-users-gear"></i> Personnel & Queue</h3>
+                            <span class="close-btn" onclick="closeFieldPersonnelModal()">&times;</span>
+                        </div>
+                        <div class="modal-body modal-body-p15">
+                            <!-- Tab Switcher -->
+                            <div class="personnel-tabs">
+                                <button id="tab-personnel" class="active" onclick="switchPersonnelTab('personnel')">
+                                    <i class="fa-solid fa-user-group"></i> Personnel
+                                </button>
+                                <button id="tab-queue" onclick="switchPersonnelTab('queue')">
+                                    <i class="fa-solid fa-truck-ramp-box"></i> Queue
+                                </button>
+                            </div>
+
+                            <div class="drivers-widget personnel-widget-clean">
+                                <!-- Personnel Section -->
+                                <div id="personnel-section">
+                                    <div class="widget-header flex-center justify-between personnel-header-clean">
+                                        <h3 class="m-0 flex-center gap-10 font-size-1-0">
+                                            <i class="fa-solid fa-id-card"></i> Personnel List
+                                        </h3>
+                                        <button onclick="openAddStaffModal()" class="btn-icon-only text-primary font-size-1-0" title="Add Staff">
+                                            <i class="fa-solid fa-plus-circle"></i>
+                                        </button>
+                                    </div>
+                                    <!-- Section: Staff List -->
+                                    <div id="staff-list" class="driver-list">
+                                        <!-- Populated by JS -->
+                                    </div>
+                                </div>
+
+                                <!-- Queue Section -->
+                                <div id="queue-section" class="d-none">
+                                    <div class="widget-header flex-center justify-between personnel-header-clean m-0">
+                                        <h3 class="m-0 flex-center gap-10 font-size-1-0">
+                                            <i class="fa-solid fa-truck-ramp-box"></i> Delivery Pipeline
+                                        </h3>
+                                    </div>
+                                    <!-- Section: Delivery Queue List -->
+                                    <div id="delivery-queue-list" class="driver-list">
+                                        <div class="empty-queue-msg">No pending deliveries</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- Section: Services Performance View -->
+            <section id="services-performance-view" class="services-performance-page d-none">
+                <div class="personnel-tabs performance-view-tabs">
+                    <button id="performance-tab-dispatch" class="active" onclick="switchPerformanceView('dispatch')">
+                        <i class="fa-solid fa-truck-fast"></i> Live Dispatch Board
+                    </button>
+                    <button id="performance-tab-metrics" onclick="switchPerformanceView('metrics')">
+                        <i class="fa-solid fa-chart-line"></i> Technician Performance
+                    </button>
+                </div>
+
+                <!-- Section: Performance Panel Dispatch -->
+                <div id="performance-panel-dispatch" class="performance-panel">
+                    <section class="route-board-shell route-board-modal">
+                        <div class="route-board-header">
+                            <div>
+                                <p class="route-board-kicker">Live Dispatch Board</p>
+                                <h3>Route &amp; Field Tracking</h3>
+                                <p class="route-board-subtitle" id="route-board-status">Loading live route updates...</p>
+                            </div>
+                            <div class="route-board-toolbar">
+                                <div class="route-board-summary">
+                                    <div class="route-board-summary-item">
+                                        <span class="route-summary-value" id="route-summary-active">0</span>
+                                        <span class="route-summary-label">Active Visits</span>
+                                    </div>
+                                    <div class="route-board-summary-item warning">
+                                        <span class="route-summary-value" id="route-summary-delayed">0</span>
+                                        <span class="route-summary-label">Delayed Jobs</span>
+                                    </div>
+                                </div>
+                                <button class="btn-secondary" onclick="refreshRouteBoard()">
+                                    <i class="fa-solid fa-rotate"></i> Refresh Board
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="route-board-grid">
+                            <div class="route-lane route-lane-en-route">
+                                <div class="route-lane-header">
+                                    <div>
+                                        <h4>En Route</h4>
+                                        <p>Assigned teams travelling or ready to leave.</p>
+                                    </div>
+                                    <span class="route-lane-count" id="route-count-en-route">0</span>
+                                </div>
+                                <!-- Section: Route Board En Route -->
+                                <div class="route-lane-body" id="route-board-en-route"></div>
+                            </div>
+
+                            <div class="route-lane route-lane-on-site">
+                                <div class="route-lane-header">
+                                    <div>
+                                        <h4>On Site</h4>
+                                        <p>Jobs currently being handled at customer locations.</p>
+                                    </div>
+                                    <span class="route-lane-count" id="route-count-on-site">0</span>
+                                </div>
+                                <!-- Section: Route Board On Site -->
+                                <div class="route-lane-body" id="route-board-on-site"></div>
+                            </div>
+
+                            <div class="route-lane route-lane-delayed">
+                                <div class="route-lane-header">
+                                    <div>
+                                        <h4>Delayed</h4>
+                                        <p>Visits past ETA and needing immediate follow-up.</p>
+                                    </div>
+                                    <span class="route-lane-count" id="route-count-delayed">0</span>
+                                </div>
+                                <!-- Section: Route Board Delayed -->
+                                <div class="route-lane-body" id="route-board-delayed"></div>
+                            </div>
+
+                            <div class="route-lane route-lane-finished">
+                                <div class="route-lane-header">
+                                    <div>
+                                        <h4>Finished</h4>
+                                        <p>Completed route jobs, deliveries, and field work.</p>
+                                    </div>
+                                    <span class="route-lane-count" id="route-count-finished">0</span>
+                                </div>
+                                <!-- Section: Route Board Finished -->
+                                <div class="route-lane-body" id="route-board-finished"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Section: Performance Panel Metrics -->
+                <div id="performance-panel-metrics" class="performance-panel d-none">
+                    <section class="history-modal-shell performance-metrics-shell">
+                        <div class="history-modal-header">
+                            <div>
+                                <p class="route-board-kicker">Performance Summary</p>
+                                <h3 class="history-shell-title">Technician Performance</h3>
+                                <p class="route-board-subtitle">Track completed jobs, average completion time, and customer satisfaction by technician.</p>
+                            </div>
+                        </div>
+                        <div class="table-clean history-table-shell">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Technician</th>
+                                        <th>Completed Jobs</th>
+                                        <th>Avg. Completion</th>
+                                        <th>Avg. Rating</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="performance-table-body"></tbody>
+                            </table>
+                        </div>
+                        <!-- Section: Performance Pagination -->
+                        <div id="performance-pagination" class="pagination-container"></div>
+                    </section>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Staff Details Modal -->
+    <div id="staff-details-modal" class="modal">
+        <div class="modal-content max-w-450">
+            <div class="modal-header">
+                <h3>Staff Profile</h3>
+                <span class="close-btn" onclick="closeStaffDetails()">&times;</span>
+            </div>
+            <div class="modal-body modal-body-centered">
+                <div class="avatar-circle-lg">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h3 id="staff-detail-name" class="mb-5">Staff Name</h3>
+                <p id="staff-detail-status" class="text-muted mb-20">Status</p>
+                
+                <div class="staff-info-card">
+                    <p class="mb-8"><strong>Role:</strong> Field Technician</p>
+                    <p class="mb-8"><strong>Phone:</strong> <span id="staff-phone-val">+94 77 123 4567</span></p>
+                    <p><strong>Completed Tasks:</strong> 12 this week</p>
+                </div>
+
+                <div class="mt-20 d-flex gap-10">
+                     <!-- Call button removed as requested -->
+                     <button class="btn-secondary w-100-flex-1" onclick="sendSMS()"><i class="fa-solid fa-message"></i> Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Staff Modal -->
+    <div id="add-staff-modal" class="modal">
+        <div class="modal-content max-w-400">
+            <div class="modal-header">
+                <h3>Add New Staff</h3>
+                <span class="close-btn" onclick="closeAddStaff()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="event.preventDefault(); addNewStaff();">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="new-staff-name" placeholder="e.g. John Doe" required class="input-full">
+                    </div>
+                    <div class="form-group mt-15">
+                        <label>Role</label>
+                        <select class="input-full">
+                            <option>Driver</option>
+                            <option>Technician</option>
+                            <option>Helper</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-cancel" onclick="closeAddStaff()">Cancel</button>
+                        <button type="submit" class="btn-save">Add Member</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Field Personnel Modal (Keeping existing simple list modal if needed, or replacing) -->
+    <!-- (The previous modal is redundant with the new interactive sidebar, hiding it or repurposing) -->
+    <div id="field-personnel-modal" class="modal d-none">
+         <!-- Keeping code but hidden as user wants sidebar interaction now -->
+    </div>
+    
+    <!-- Warranty Registration Modal -->
+    <div id="warranty-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="warranty-modal-title">Register New Warranty</h3>
+                <span class="close-btn" onclick="closeWarrantyModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="warranty-form">
+                    <input type="hidden" id="wrn-id">
+                    <div class="form-group">
+                        <label>Serial Number (SN)</label>
+                        <input type="text" id="wrn-sn" required placeholder="e.g. SN-8821-X">
+                    </div>
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" id="wrn-product" required placeholder="e.g. Makita Power Drill">
+                    </div>
+                    <div class="form-group">
+                        <label>Customer Name</label>
+                        <input type="text" id="wrn-customer" required placeholder="e.g. John Doe">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Purchase Date</label>
+                            <input type="date" id="wrn-purchase-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Next Service (Cycle)</label>
+                            <select id="wrn-cycle">
+                                <option value="3">Every 3 Months</option>
+                                <option value="6" selected>Every 6 Months</option>
+                                <option value="12">Every 1 Year</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-cancel" onclick="closeWarrantyModal()">Cancel</button>
+                        <button type="submit" class="btn-save">Save Warranty</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service History Modal -->
+    <div id="service-history-modal" class="modal">
+        <div class="modal-content history-modal-content">
+            <div class="modal-header">
+                <h3>Service Maintenance History</h3>
+                <span class="close-btn" onclick="closeServiceHistory()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <section class="history-modal-shell">
+                    <div class="history-modal-header">
+                        <div>
+                            <p class="route-board-kicker">Completed Service History</p>
+                            <h3 id="history-product-name" class="history-shell-title">Service Archive</h3>
+                            <p id="history-sn" class="route-board-subtitle">Review completed repairs, deliveries, installations, and technician assignments.</p>
+                        </div>
+                        <div class="route-board-summary history-summary-group">
+                            <div class="route-board-summary-item">
+                                <span class="route-summary-value" id="history-total-jobs">0</span>
+                                <span class="route-summary-label">Completed Jobs</span>
+                            </div>
+                            <div class="route-board-summary-item">
+                                <span class="route-summary-value history-date-value" id="history-last-service">-</span>
+                                <span class="route-summary-label">Last Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-clean history-table-shell">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Service Type</th>
+                                    <th>Technician</th>
+                                </tr>
+                            </thead>
+                            <tbody id="service-history-body">
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Request Modal -->
+    <div id="service-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Request Details</h3><span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="service-form">
+                    <input type="hidden" id="srv-id">
+                    <div class="form-row">
+                        <!-- Section: Cust Name -->
+                        <div class="form-group"><label>Customer Name</label><input type="text" id="cust-name" required placeholder="Enter customer name" title="Customer Name"></div>
+                        <!-- Section: Cust Phone -->
+                        <div class="form-group"><label>Customer Phone</label><input type="text" id="cust-phone" placeholder="+94 77 XXX XXXX" title="Customer Phone"></div>
+                    </div>
+                    <div class="form-row">
+                        <!-- Section: Cust Address -->
+                        <div class="form-group"><label>Customer Address</label><input type="text" id="cust-address" placeholder="Delivery/service address" title="Customer Address"></div>
+                        <!-- Section: Cust Email -->
+                        <div class="form-group"><label>Customer Email</label><input type="email" id="cust-email" placeholder="customer@example.com" title="Customer Email"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Service Type</label>
+                            <select id="srv-type" title="Select Service Type">
+                                <option value="Repair">Repair</option>
+                                <option value="Installation">Installation</option>
+                                <option value="Delivery Only">Delivery Only</option>
+                                <option value="Maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Priority</label>
+                            <select id="srv-priority" title="Select Priority Level">
+                                <option value="Low">Low</option>
+                                <option value="Medium" selected>Medium</option>
+                                <option value="High">High</option>
+                                <option value="Urgent">Urgent</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <!-- Section: Srv Cost -->
+                        <div class="form-group"><label>Service Cost (LKR)</label><input type="number" id="srv-cost" min="0" step="0.01" placeholder="0.00" title="Service Cost"></div>
+                        <!-- Section: Srv Eta -->
+                        <div class="form-group"><label>Estimated Completion</label><input type="date" id="srv-eta" title="Estimated Completion Date"></div>
+                    </div>
+
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Service Status</label>
+                            <select id="srv-status" title="Select Service Status">
+                                <option value="Requested">Requested</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Delivery Status</label>
+                            <select id="del-status" title="Select Delivery Status">
+                                <option value="Pending">Pending</option>
+                                <option value="Out for Delivery">Out for Delivery</option>
+                                <option value="Delivered">Delivered</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Assigned Staff/Driver</label>
+                            <select id="del-driver" title="Select Assigned Staff">
+                                <option value="">Select Staff...</option>
+                                <option value="Praveen Arul">Praveen Arul</option>
+                                <option value="Tharsan Raj">Tharsan Raj</option>
+                                <option value="Mubeen S.">Mubeen S.</option>
+                            </select>
+                        </div>
+                        <!-- Section: Del Date -->
+                        <div class="form-group"><label>Date/Time</label><input type="datetime-local" id="del-date" title="Select Date and Time"></div>
+                    </div>
+ 
+                    <div class="modal-footer">
+                        <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+                        <button type="submit" class="btn-save">Save Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/rbac.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/services.js?v=1.2"></script>
+    <script>
+        // Staff Details Modal
+        function openStaffDetails(name, status, statusClass, phone) {
+            document.getElementById('staff-detail-name').innerText = name;
+            document.getElementById('staff-detail-status').innerHTML = `<i class="fa-solid fa-circle ${statusClass}"></i> ${status}`;
+            document.getElementById('staff-phone-val').innerText = phone || 'Not provided';
+            document.getElementById('staff-details-modal').style.display = 'flex';
+        }
+
+        function closeStaffDetails() {
+            document.getElementById('staff-details-modal').style.display = 'none';
+        }
+
+        function sendSMS() {
+            const phoneText = document.getElementById('staff-phone-val').innerText.trim();
+            if (!phoneText || phoneText === 'Not provided') {
+                alert('No phone number available for this staff member.');
+                return;
+            }
+            const cleanPhone = phoneText.replace(/[^0-9+]/g, '');
+            const staffName = document.getElementById('staff-detail-name').innerText;
+            const msg = `Hi ${staffName}, this is Central Hardwares.`;
+            if (typeof window.openSmsApp === 'function') {
+                window.openSmsApp(cleanPhone, msg);
+            } else {
+                window.location.href = `sms:${cleanPhone}?body=${encodeURIComponent(msg)}`;
+            }
+        }
+
+        // Add Staff Modal
+        function openAddStaffModal() {
+            document.getElementById('add-staff-modal').style.display = 'flex';
+        }
+
+        function closeAddStaff() {
+            document.getElementById('add-staff-modal').style.display = 'none';
+        }
+
+        // addNewStaff is now handled in services.js with persistence
+
+        function openPersonnelModal() {
+            openFieldPersonnelModal();
+            switchPersonnelTab('personnel');
+        }
+
+        function openQueueModal() {
+            openFieldPersonnelModal();
+            switchPersonnelTab('queue');
+        }
+
+        function switchPersonnelTab(tab) {
+            const personnelSection = document.getElementById('personnel-section');
+            const queueSection = document.getElementById('queue-section');
+            const tabPersonnel = document.getElementById('tab-personnel');
+            const tabQueue = document.getElementById('tab-queue');
+            const modalTitle = document.getElementById('personnel-modal-title');
+
+            if (tab === 'personnel') {
+                personnelSection.classList.remove('d-none');
+                queueSection.classList.add('d-none');
+                tabPersonnel.classList.add('active');
+                tabQueue.classList.remove('active');
+                modalTitle.innerHTML = '<i class="fa-solid fa-user-group"></i> Personnel Management';
+            } else {
+                personnelSection.classList.add('d-none');
+                queueSection.classList.remove('d-none');
+                tabPersonnel.classList.remove('active');
+                tabQueue.classList.add('active');
+                modalTitle.innerHTML = '<i class="fa-solid fa-truck-ramp-box"></i> Delivery Pipeline';
+            }
+        }
+
+        function openFieldPersonnelModal() {
+             const m = document.getElementById('field-personnel-modal');
+             if(m) {
+                m.classList.add('show');
+                m.style.display = 'flex'; // Ensure flex for centering
+             }
+        }
+        function closeFieldPersonnelModal() {
+             const m = document.getElementById('field-personnel-modal');
+             if(m) {
+                m.classList.remove('show');
+                m.style.display = 'none';
+             }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = ['service-modal', 'warranty-modal', 'service-history-modal', 'performance-modal'];
+            modals.forEach(id => {
+                const modal = document.getElementById(id);
+                if (modal && event.target == modal) {
+                    if (id === 'performance-modal' && typeof window.closePerformanceModal === 'function') {
+                        window.closePerformanceModal();
+                    } else {
+                        modal.classList.remove('show');
+                    }
+                }
+            });
+            // For display-based modals (legacy)
+            const displayModals = ['staff-details-modal', 'add-staff-modal', 'field-personnel-modal'];
+            displayModals.forEach(id => {
+                const modal = document.getElementById(id);
+                if (modal && event.target == modal) {
+                    if(id === 'field-personnel-modal') modal.classList.remove('show'); // Also remove class
+                    modal.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

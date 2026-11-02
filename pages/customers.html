@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers - Hardware Admin</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+    <link rel="shortcut icon" href="../images/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <!-- Mobile Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- Section: Mobilesidebar -->
+    <aside class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="user-profile-mobile">
+                <img src="../images/logo-icon.png" class="mobile-user-avatar" id="mobile-user-img">
+                <div class="mobile-user-info">
+                    <span id="mobile-user-name">Admin</span>
+                    <small id="mobile-user-role">Administrator</small>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close-sidebar" id="closeSidebar"></i>
+        </div>
+        <div class="mobile-sidebar-body">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-box"></i> Inventory</a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-file-invoice"></i> Orders</a></li>
+                <li><a href="invoices.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a></li>
+                <li><a href="finance.html"><i class="fa-solid fa-coins"></i> Finance</a></li>
+                <li><a href="suppliers.html"><i class="fa-solid fa-truck-field"></i> Suppliers</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a></li>
+
+                <li class="active"><a href="customers.html"><i class="fa-solid fa-user-group"></i> Customers</a></li>
+                <li><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+                <li><a href="activity.html"><i class="fa-solid fa-chart-line"></i> Activity</a></li>
+            </ul>
+        </div>
+        <div class="mobile-sidebar-footer">
+            <button class="btn-primary" style="width: 100%;" onclick="window.logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container-wrapper">
+            <div class="top-left top-left-layout">
+                <p class="top-info-p date-pill-style">
+                    <span id="srilanka-date-time" class="datetime-text">Today: ---</span>
+                </p>
+                <span id="top-bar-user-greeting" class="welcome-message-text">Welcome</span>
+            </div>
+            <div class="top-right">
+                <a href="activity.html">Activity Login</a>
+                <span class="location-text"><i class="fa-solid fa-location-dot text-danger margin-r-5"></i> Jaffna, Main St.</span>
+                <a href="#" class="admin-link"><strong>Admin</strong></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <div class="main-header">
+        <div class="container-wrapper header-flex">
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            
+            <!-- Logo -->
+            <a href="index.html" class="logo-area">
+                <img src="../images/logo-icon.png" alt="Central Hardwares" class="system-logo-icon">
+                <div class="logo-text">
+                    <h2>Central</h2>
+                    <span>HARDWARES</span>
+                </div>
+            </a>
+
+            <!-- Search Bar (Clock + Sales Pulse) -->
+            <div class="header-search header-search-bar">
+                <div class="clock-container">
+                    <div class="clock-block">
+                        <span id="c-hours" class="clock-time">--</span>
+                        <span class="clock-label">Hours</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-mins" class="clock-time">--</span>
+                        <span class="clock-label">Mins</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-secs" class="clock-time">--</span>
+                        <span class="clock-label">Secs</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-session" class="clock-time">--</span>
+                        <span class="clock-label">Session</span>
+                    </div>
+                </div>
+
+                <!-- Low Stock Widget -->
+                <a href="inventory.html" class="low-stock-widget severity-ok">
+                    <div class="stock-warning-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="stock-info">
+                        <span id="low-stock-count-header">0</span>
+                        <p>Items Critically Low</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Icons -->
+            <div class="header-icons">
+                <!-- Notification Bell -->
+                <div class="icon-item" id="notification-bell" onclick="toggleNotifications()">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Alerts</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='activity.html'">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Activity</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='reports.html'">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    <span>Report</span>
+                </div>
+                <div class="icon-item dark-mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fa-solid fa-moon"></i>
+                    <span>Dark</span>
+                </div>
+                <div class="icon-item settings-icon" onclick="window.location.href='account.html'">
+                    <i class="fa-solid fa-gear" style="color: #f97316;"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="icon-item logout-btn-header" onclick="window.logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span style="color: #ef4444;">Logout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <div class="container-wrapper nav-flex">
+            <!-- Section: Depttoggle -->
+            <div class="dept-btn" id="deptToggle">
+                <i class="fa-solid fa-border-all"></i>
+                <span>ALL DEPARTMENTS</span>
+            </div>
+            
+            <div class="nav-stats animate-reveal delay-1">
+                <div class="nav-stat-item">
+                    <span>Total Customers</span>
+                    <span class="counter" id="nav-cust-total">0</span>
+                </div>
+
+                <div class="nav-stat-item">
+                    <span>New This Month</span>
+                    <span class="counter" id="nav-cust-new">0</span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>Active Today</span>
+                    <span class="counter" id="nav-cust-active">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-wrapper main-layout">
+        <!-- Section: Sidebar -->
+        <aside class="sidebar-widget" id="sidebar">
+            <div class="widget-header">
+                <h3>Admin Menu</h3>
+            </div>
+            <ul class="cat-list">
+                <li><a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-box"></i> Inventory</a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-file-invoice"></i> Orders</a></li>
+                
+
+                <li><a href="invoices.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-truck"></i> Services & Delivery</a></li>
+                <li><a href="finance.html"><i class="fa-solid fa-coins"></i> Finance</a></li>
+                <li><a href="suppliers.html"><i class="fa-solid fa-truck-field"></i> Suppliers</a></li>
+                <li class="active"><a href="customers.html"><i class="fa-solid fa-user-group"></i> Customers</a></li>
+                <li><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+                <li><a href="activity.html"><i class="fa-solid fa-chart-line"></i> Activity</a></li>
+            </ul>
+        </aside>
+
+        <div class="content-area fadeIn">
+            <div class="dashboard-header">
+                <h2>Customer Management</h2>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-primary" onclick="openCustomerModal()"><i class="fa-solid fa-plus"></i> Add Customer</button>
+                </div>
+            </div>
+
+
+
+            <!-- Toolbar -->
+            <div class="inventory-toolbar">
+                <!-- Section: Customer Tabs -->
+                <div class="filter-tabs" id="customer-tabs">
+                    <button class="active" onclick="filterCustomers('all', this)">ALL CUSTOMERS</button>
+
+                </div>
+                <div class="search-wrap">
+                    <div class="toolbar-search-container">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="customer-search" placeholder="Search customers..." 
+                               title="Search customers" aria-label="Search customers">
+                    </div>
+                    <button class="btn-toolbar" onclick="exportCustomers()" title="Export customer data"><i class="fa-solid fa-download"></i> EXPORT DATA</button>
+                    <button class="btn-toolbar" onclick="window.openReportPrintPreview('customers-table', 'Customers Report')" title="Print customer list"><i class="fa-solid fa-print"></i> PRINT DATA</button>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="table-clean">
+                    <table id="customers-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">#</th>
+                                <th>Customer Info</th>
+                                <th>Phone</th>
+                                <th>Last Product</th>
+                                <th>Warranty</th>
+                                <th>Buying Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customers-table-body">
+                            <!-- Filled by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Section: Customers Pagination -->
+                <div id="customers-pagination" class="pagination-container"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Customer Modal -->
+    <div id="customer-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add New Customer</h3>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="customer-form">
+                    <input type="hidden" id="c-id">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="c-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="text" id="c-phone" required>
+                    </div>
+                     <div class="form-group">
+                        <label>Email (Optional)</label>
+                        <input type="email" id="c-email">
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" id="c-address">
+                    </div>
+                    <div class="form-group">
+                        <label>Product Bought</label>
+                        <select id="c-product">
+                            <option value="">Select a product...</option>
+                        </select>
+                    </div>
+                    <!-- Section: C Warranty -->
+                    <div class="form-group"><label>Warranty Period</label><input type="text" id="c-warranty" placeholder="e.g. 1 Year"></div>
+                    <!-- Section: C Buy Date -->
+                    <div class="form-group"><label>Buying Date</label><input type="date" id="c-buy-date"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-light" id="cancel-btn">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Customer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Customer Modal -->
+    <div id="view-customer-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Customer Details</h3>
+                <span class="close-view-btn">&times;</span>
+            </div>
+            <!-- Section: View Customer Body -->
+            <div class="modal-body" id="view-customer-body">
+                <!-- Customer details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/rbac.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/customers.js"></script>
+</body>
+</html>

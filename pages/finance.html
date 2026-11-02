@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Management - Hardware Admin</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+    <link rel="shortcut icon" href="../images/favicon.svg" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/finance.css">
+</head>
+<body>
+    <!-- Mobile Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- Section: Mobilesidebar -->
+    <aside class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="user-profile-mobile">
+                <img src="../images/logo-icon.png" class="mobile-user-avatar" id="mobile-user-img">
+                <div class="mobile-user-info">
+                    <span id="mobile-user-name">Admin</span>
+                    <small id="mobile-user-role">Administrator</small>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close-sidebar" id="closeSidebar"></i>
+        </div>
+        <div class="mobile-sidebar-body">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-box"></i> Inventory</a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-file-invoice"></i> Orders</a></li>
+                <li><a href="invoices.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a></li>
+                <li class="active"><a href="finance.html"><i class="fa-solid fa-coins"></i> Finance</a></li>
+                <li><a href="suppliers.html"><i class="fa-solid fa-truck-field"></i> Suppliers</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a></li>
+
+                <li><a href="customers.html"><i class="fa-solid fa-user-group"></i> Customers</a></li>
+                <li><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+                <li><a href="activity.html"><i class="fa-solid fa-chart-line"></i> Activity</a></li>
+            </ul>
+        </div>
+        <div class="mobile-sidebar-footer">
+            <button class="btn-primary" style="width: 100%;" onclick="window.logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container-wrapper">
+            <div class="top-left top-left-layout">
+                <p class="top-info-p date-pill-style">
+                    <span id="srilanka-date-time" class="datetime-text">Today: ---</span>
+                </p>
+                <span id="top-bar-user-greeting" class="welcome-message-text">Welcome</span>
+            </div>
+            <div class="top-right">
+                <a href="activity.html">Activity Login</a>
+                <span class="location-text"><i class="fa-solid fa-location-dot text-danger margin-r-5"></i> Jaffna, Main St.</span>
+                <a href="#" class="admin-link"><strong>Admin</strong></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <div class="main-header">
+        <div class="container-wrapper header-flex">
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            
+            <!-- Logo -->
+            <a href="index.html" class="logo-area">
+                <img src="../images/logo-icon.png" alt="Central Hardwares" class="system-logo-icon">
+                <div class="logo-text">
+                    <h2>Central</h2>
+                    <span>HARDWARES</span>
+                </div>
+            </a>
+
+            <!-- Search Bar (Clock + Sales Pulse) -->
+            <div class="header-search header-search-bar">
+                <div class="clock-container">
+                    <div class="clock-block">
+                        <span id="c-hours" class="clock-time">--</span>
+                        <span class="clock-label">Hours</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-mins" class="clock-time">--</span>
+                        <span class="clock-label">Mins</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-secs" class="clock-time">--</span>
+                        <span class="clock-label">Secs</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-session" class="clock-time">--</span>
+                        <span class="clock-label">Session</span>
+                    </div>
+                </div>
+
+                <!-- Low Stock Widget -->
+                <a href="inventory.html" class="low-stock-widget severity-ok">
+                    <div class="stock-warning-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="stock-info">
+                        <span id="low-stock-count-header">0</span>
+                        <p>Items Critically Low</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Icons -->
+            <div class="header-icons">
+                <!-- Notification Bell -->
+                <div class="icon-item" id="notification-bell" onclick="toggleNotifications()">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Alerts</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='admin.html'">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Admin</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='activity.html'">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Activity</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='reports.html'">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    <span>Report</span>
+                </div>
+                <div class="icon-item dark-mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fa-solid fa-moon"></i>
+                    <span>Dark</span>
+                </div>
+                <div class="icon-item settings-icon" onclick="window.location.href='account.html'">
+                    <i class="fa-solid fa-gear" style="color: #f97316;"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="icon-item logout-btn-header" onclick="window.logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span style="color: #ef4444;">Logout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <div class="container-wrapper nav-flex">
+            <!-- Section: Depttoggle -->
+            <div class="dept-btn" id="deptToggle">
+                <i class="fa-solid fa-border-all"></i>
+                <span>ALL DEPARTMENTS</span>
+            </div>
+            
+            <div class="nav-stats animate-reveal delay-1">
+                <div class="nav-stat-item">
+                    <span>TOTAL REVENUE</span>
+                    <span>LKR <span class="counter" id="nav-fin-revenue">0</span></span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>TOTAL EXPENSES</span>
+                    <span>LKR <span class="counter" id="nav-fin-expenses">0</span></span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>TAX ESTIMATE</span>
+                    <span>LKR <span class="counter" id="nav-fin-tax">0</span></span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>NET PROFIT</span>
+                    <span>LKR <span class="counter" id="nav-fin-profit">0</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="container-wrapper main-layout">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar-widget" id="sidebar">
+            <div class="widget-header">
+                <h3>Admin Menu</h3>
+            </div>
+            <ul class="cat-list">
+                <li><a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-box"></i> Inventory</a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-file-invoice"></i> Orders</a></li>
+                
+
+                <li><a href="invoices.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-truck"></i> Services & Delivery</a></li>
+                <li class="active"><a href="finance.html"><i class="fa-solid fa-coins"></i> Finance</a></li>
+                <li><a href="suppliers.html"><i class="fa-solid fa-truck-field"></i> Suppliers</a></li>
+                <li><a href="customers.html"><i class="fa-solid fa-user-group"></i> Customers</a></li>
+                <li><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+                <li><a href="activity.html"><i class="fa-solid fa-chart-line"></i> Activity</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="content-area fadeIn">
+            
+            <div class="dashboard-header">
+                <h2>Financial Management</h2>
+                <div class="btn-group">
+
+                    <button class="btn-primary" onclick="openPaymentModal()"><i class="fa-solid fa-plus"></i> Add Payment</button>
+                    <button class="btn-primary" style="background:#dc3545;" onclick="openExpenseModal()"><i class="fa-solid fa-minus"></i> Add Expense</button>
+                </div>
+            </div>
+
+
+
+            <!-- Toolbar (acting as Tabs) -->
+            <div class="inventory-toolbar">
+                <div class="filter-tabs">
+                    <button class="tab-btn active" onclick="switchTab('income')">Income</button>
+                    <button class="tab-btn" onclick="switchTab('expenses')">Expenses</button>
+                </div>
+                <div class="search-wrap">
+                    <div class="toolbar-search-container">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="finance-search" placeholder="Search transactions..." 
+                               title="Search transactions" aria-label="Search transactions">
+                    </div>
+                    <button class="btn-toolbar" onclick="exportFinance()" title="Export transactions data"><i class="fa-solid fa-download"></i> EXPORT DATA</button>
+                    <button class="btn-toolbar" onclick="printCurrentFinanceTab()" title="Print transactions list"><i class="fa-solid fa-print"></i> PRINT DATA</button>
+                </div>
+            </div>
+            
+            <div class="content-section">
+
+            <!-- INCOME TAB -->
+            <div id="tab-income" class="tab-content active">
+
+                    <div class="table-clean">
+                        <table id="income-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">#</th>
+                                    <th>Date</th>
+                                    <th>Sale Type</th>
+                                    <th>Method</th>
+                                    <th>Amount</th>
+                                    <th class="text-center">ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="income-table-body">
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Section: Income Pagination -->
+                    <div id="income-pagination" class="pagination-container"></div>
+
+            </div>
+
+            <!-- EXPENSES TAB -->
+            <div id="tab-expenses" class="tab-content">
+                <!-- Section: Pending Approval Bar -->
+                <div id="pending-approval-bar" class="finance-approval-hint" style="display:none; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong id="pending-approval-count">0</strong> expense(s) waiting for admin approval.
+                    </div>
+                    <div>
+                        <button type="button" class="btn-primary" style="background:#2563eb; border:none;" onclick="scrollToPendingExpenses()">Review Pending</button>
+                    </div>
+                </div>
+
+                    <div class="table-clean">
+                        <table id="expense-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">#</th>
+                                    <th>Date</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th class="text-center">ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="expense-table-body">
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Section: Expense Pagination -->
+                    <div id="expense-pagination" class="pagination-container"></div>
+
+            </div>
+
+            <!-- SALARY TAB -->
+            <div id="tab-salary" class="tab-content">
+                <div class="salary-header">
+                    <h3>Staff & Technician Salary Calculator</h3>
+                    <p class="salary-help">Calculates salary based on login/logout times. Each hour is worth the staff's hourly rate.</p>
+                </div>
+
+                <div class="salary-summary">
+                    <div class="summary-card">
+                        <span class="summary-label">Total Salaries</span>
+                        <span class="summary-value">LKR <span id="total-salary-amount">0.00</span></span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-label">Total Hours</span>
+                        <span class="summary-value"><span id="total-hours-amount">0</span> hrs</span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-label">Staff Count</span>
+                        <span class="summary-value"><span id="total-staff-count">0</span></span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-label">Currency</span>
+                        <span class="summary-value">LKR (Sri Lankan Rupees)</span>
+                    </div>
+                </div>
+
+                <div class="table-clean">
+                    <table id="salary-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">ID</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Hourly Rate</th>
+                                <th>Working Days</th>
+                                <th>Total Hours</th>
+                                <th>Total Salary</th>
+                                <th>Status</th>
+                                <th class="text-center">ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salary-table-body">
+                            <!-- JS Populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SALARY DETAIL MODAL -->
+
+
+        <!-- EDIT HOURLY RATE MODAL -->
+        <div id="edit-rate-modal" class="modal">
+            <div class="modal-content" style="max-width: 400px;">
+                <div class="modal-header">
+                    <h3>Edit Hourly Rate</h3>
+                    <span class="close-btn" onclick="closeEditRateModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-rate-form">
+                        <input type="hidden" id="rate-staff-id">
+                        <div class="editing-for-box">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Editing For:</label>
+                                <input type="text" id="rate-staff-name" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Hourly Rate (LKR)</label>
+                            <input type="number" id="new-hourly-rate" step="0.01" min="0" required>
+                        </div>
+                        <div class="modal-footer" style="padding: 15px 0 0 0;">
+                            <button type="button" class="btn-cancel" onclick="closeEditRateModal()">Cancel</button>
+                            <button type="submit" class="btn-save">Update Rate</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PAYMENT MODAL -->
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Payment Record</h3>
+                <span class="close-btn" onclick="closeModals()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="payment-form">
+                    <input type="hidden" id="pay-id">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="pay-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Sale Type</label>
+                        <select id="pay-type">
+                            <option value="Product Sale">Product Sale</option>
+                            <option value="Service">Service</option>
+                            <option value="Wholesale">Wholesale</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <select id="pay-method">
+                            <option value="Cash">Cash</option>
+                            <option value="Card">Card</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Stock Quantity (Optional)</label>
+                        <input type="number" id="pay-quantity" min="1" placeholder="e.g. 5 units sold">
+                    </div>
+                    <div class="form-group">
+                        <label>Amount (LKR)</label>
+                        <input type="number" id="pay-amount" step="0.01" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-cancel" onclick="closeModals()">Cancel</button>
+                        <button type="submit" class="btn-save">Save Payment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXPENSE MODAL -->
+    <div id="expense-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Expense Record</h3>
+                <span class="close-btn" onclick="closeModals()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="expense-form">
+                    <input type="hidden" id="exp-id">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="exp-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="exp-category">
+                            <option value="COGS">COGS (Stock Purchase)</option>
+                            <option value="Rent">Rent</option>
+                            <option value="Salary">Salaries & Wages</option>
+                            <option value="StaffSalary">Staff Salary (Individual)</option>
+                            <option value="Utilities">Electricity & Water</option>
+                            <option value="Transport">Transport & Logistics</option>
+                            <option value="Marketing">Marketing / Ads</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Tax">Government Tax</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <!-- Section: Exp Staff Group -->
+                    <div class="form-group" id="exp-staff-group" style="display:none;">
+                        <label>Select Staff Member</label>
+                        <select id="exp-staff-id" class="form-control">
+                            <option value="">-- Choose Staff --</option>
+                        </select>
+                    </div>
+                    <!-- Section: Exp Quantity Group -->
+                    <div class="form-group" id="exp-quantity-group">
+                        <label>Stock Quantity</label>
+                        <input type="number" id="exp-quantity" min="1" placeholder="e.g. 50 units purchased">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" id="exp-desc" placeholder="Details...">
+                    </div>
+                    <div class="form-group">
+                        <label>Amount (LKR)</label>
+                        <input type="number" id="exp-amount" step="0.01" required>
+                    </div>
+                    <!-- Section: Expense Approval Hint -->
+                    <div class="form-hint finance-approval-hint" id="expense-approval-hint">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Expenses above <strong id="expense-threshold-label">LKR 50,000.00</strong> require admin approval.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-cancel" onclick="closeModals()">Cancel</button>
+                        <button type="submit" class="btn-save">Save Expense</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/rbac.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/finance.js"></script>
+    <script>
+        function printCurrentFinanceTab() {
+            // Determine active tab
+            const incomeTab = document.getElementById('tab-income');
+            if (incomeTab.classList.contains('active')) {
+                printData('income-table-body');
+            } else {
+                printData('expense-table-body');
+            }
+        }
+    </script>
+</body>
+</html>

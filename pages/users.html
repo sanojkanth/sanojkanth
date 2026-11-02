@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Hardware Admin</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+    <link rel="shortcut icon" href="../images/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <!-- Mobile Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- Section: Mobilesidebar -->
+    <aside class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <div class="user-profile-mobile">
+                <img src="../images/logo-icon.png" class="mobile-user-avatar" id="mobile-user-img">
+                <div class="mobile-user-info">
+                    <span id="mobile-user-name">Admin</span>
+                    <small id="mobile-user-role">Administrator</small>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close-sidebar" id="closeSidebar"></i>
+        </div>
+        <div class="mobile-sidebar-body">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-box"></i> Inventory</a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-file-invoice"></i> Orders</a></li>
+                <li><a href="invoices.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a></li>
+                <li><a href="finance.html"><i class="fa-solid fa-coins"></i> Finance</a></li>
+                <li><a href="suppliers.html"><i class="fa-solid fa-truck-field"></i> Suppliers</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a></li>
+                <li><a href="customers.html"><i class="fa-solid fa-user-group"></i> Customers</a></li>
+                <li class="active"><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+                <li><a href="activity.html"><i class="fa-solid fa-chart-line"></i> Activity</a></li>
+            </ul>
+        </div>
+        <div class="mobile-sidebar-footer">
+            <button class="btn-primary" style="width: 100%;" onclick="window.logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container-wrapper">
+            <div class="top-left top-left-layout">
+                <p class="top-info-p date-pill-style">
+                    <span id="srilanka-date-time" class="datetime-text">Today: ---</span>
+                </p>
+                <span id="top-bar-user-greeting" class="welcome-message-text">Welcome</span>
+            </div>
+            <div class="top-right">
+                <a href="activity.html">Activity Login</a>
+                <span class="location-text"><i class="fa-solid fa-location-dot text-danger margin-r-5"></i> Jaffna, Main St.</span>
+                <a href="#" class="admin-link"><strong>Admin</strong></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <div class="main-header">
+                <div class="container-wrapper header-flex">
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Logo -->
+            <a href="index.html" class="logo-area">
+                <img src="../images/logo-icon.png" alt="Central Hardwares" class="system-logo-icon">
+                <div class="logo-text">
+                    <h2>Central</h2>
+                    <span>HARDWARES</span>
+                </div>
+            </a>
+
+            <!-- Search Bar (Clock + Sales Pulse) -->
+            <div class="header-search header-search-bar">
+                <div class="clock-container">
+                    <div class="clock-block">
+                        <span id="c-hours" class="clock-time">--</span>
+                        <span class="clock-label">Hours</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-mins" class="clock-time">--</span>
+                        <span class="clock-label">Mins</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-secs" class="clock-time">--</span>
+                        <span class="clock-label">Secs</span>
+                    </div>
+                    <span class="clock-sep">:</span>
+                    <div class="clock-block">
+                        <span id="c-session" class="clock-time">--</span>
+                        <span class="clock-label">Session</span>
+                    </div>
+                </div>
+
+                <!-- Low Stock Widget -->
+                <a href="inventory.html" class="low-stock-widget severity-ok">
+                    <div class="stock-warning-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="stock-info">
+                        <span id="low-stock-count-header">0</span>
+                        <p>Items Critically Low</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Icons -->
+            <div class="header-icons">
+                <!-- Notification Bell -->
+                <div class="icon-item" id="notification-bell" onclick="toggleNotifications()">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Alerts</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='admin.html'">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Admin</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='activity.html'">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Activity</span>
+                </div>
+                <div class="icon-item" onclick="window.location.href='reports.html'">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    <span>Report</span>
+                </div>
+                <div class="icon-item dark-mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fa-solid fa-moon"></i>
+                    <span>Dark</span>
+                </div>
+                <div class="icon-item settings-icon" onclick="window.location.href='account.html'">
+                    <i class="fa-solid fa-gear" style="color: #f97316;"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="icon-item logout-btn-header" onclick="window.logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span style="color: #ef4444;">Logout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <div class="container-wrapper nav-flex">
+            <!-- Section: Depttoggle -->
+            <div class="dept-btn" id="deptToggle">
+                <i class="fa-solid fa-border-all"></i>
+                <span>ALL DEPARTMENTS</span>
+            </div>
+            
+            <div class="nav-stats animate-reveal delay-1">
+                <div class="nav-stat-item">
+                    <span>Total Users</span>
+                    <span class="counter" id="nav-usr-total">0</span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>Active Admins</span>
+                    <span class="counter" id="nav-usr-admins">0</span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>Active Staff</span>
+                    <span class="counter" id="nav-usr-staff">0</span>
+                </div>
+                <div class="nav-stat-item">
+                    <span>Active Sessions</span>
+                    <span class="counter" id="nav-usr-sessions">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-wrapper main-layout">
+        <!-- Section: Sidebar -->
+        <aside class="sidebar-widget" id="sidebar">
+            <div class="widget-header">
+                <h3>Admin Menu</h3>
+            </div>
+            <ul class="cat-list">
+                <li><a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-box"></i> Inventory</a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-file-invoice"></i> Orders</a></li>
+                
+
+                <li><a href="invoices.html"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-truck"></i> Services & Delivery</a></li>
+                <li><a href="finance.html"><i class="fa-solid fa-coins"></i> Finance</a></li>
+                <li><a href="suppliers.html"><i class="fa-solid fa-truck-field"></i> Suppliers</a></li>
+                <li><a href="customers.html"><i class="fa-solid fa-user-group"></i> Customers</a></li>
+                <li class="active"><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+                <li><a href="activity.html"><i class="fa-solid fa-chart-line"></i> Activity</a></li>
+            </ul>
+        </aside>
+
+        <div class="content-area fadeIn">
+            <div class="dashboard-header">
+                <h2>User Management</h2>
+                <div class="header-actions">
+                     <button class="btn-primary" onclick="openUserModal()"><i class="fa-solid fa-plus"></i> Add User</button>
+                     <button class="btn-secondary" onclick="resetUserData()"><i class="fa-solid fa-rotate-left"></i> Reset Data</button>
+                </div>
+            </div>
+
+
+
+            <!-- Toolbar -->
+            <div class="inventory-toolbar">
+                <div class="filter-tabs">
+                    <button class="active" onclick="filterUsers('All', this)">ALL</button>
+                    <button onclick="filterUsers('Admin', this)">ADMINS</button>
+                    <button onclick="filterUsers('Staff', this)">STAFF</button>
+                </div>
+                <div class="search-wrap">
+                    <div class="toolbar-search-container">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="user-search" placeholder="Search users by name, email, or role..." 
+                               title="Search users" aria-label="Search users">
+                    </div>
+                    <button class="btn-toolbar" onclick="exportUsers()" title="Export user data"><i class="fa-solid fa-download"></i> EXPORT DATA</button>
+                    <button class="btn-toolbar" onclick="window.openReportPrintPreview('users-table', 'User Management List')" title="Print user list"><i class="fa-solid fa-print"></i> PRINT DATA</button>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <div class="table-clean">
+                    <table id="users-table">
+                        <thead>
+                            <tr>
+                                    <th style="width: 50px;">#</th>
+                                    <th>Avatar</th>
+                                    <th>Username</th>
+                                    <th>Status</th>
+                                    <th>Password</th>
+                                    <th>Role</th>
+                                    <th>Last Login</th>
+                                    <th>Duration</th>
+                                    <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-table-body"></tbody>
+                    </table>
+                </div>
+                <!-- #5 Pagination -->
+                <div id="users-pagination"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add New User</h3><span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="user-form">
+                    <input type="hidden" id="user-id">
+                    <div class="form-group">
+                        <label for="user-image">Profile Image</label>
+                        <input type="file" id="user-image" accept="image/*" title="Upload profile image">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" required placeholder="Enter full name or username" title="Enter Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required placeholder="example@hardware.lk" title="Enter Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Mobile Number</label>
+                        <input type="text" id="phone" placeholder="0771234567" title="Enter Mobile Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Create Login Credential" title="Create Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select id="role" title="Select User Role">
+                            <option value="Admin">Admin</option>
+                            <option value="Staff">Staff</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+                        <button type="submit" class="btn-save">Save User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View User Modal -->
+    <div id="view-user-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>User Details</h3>
+                <span class="close-view-btn">&times;</span>
+            </div>
+            <!-- Section: View User Body -->
+            <div class="modal-body" id="view-user-body">
+                <!-- User details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/rbac.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/users.js"></script>
+</body>
+</html>

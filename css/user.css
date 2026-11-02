@@ -1,0 +1,104 @@
+/* ========= User Dropdown (Header) ========= */
+.user-menu {
+  position: relative;
+  display: inline-block;
+}
+.user-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #b08a2f;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.user-btn:focus {
+  outline: none;
+}
+.user-list {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 15px);
+  background: #fff;
+  color: #1e293b;
+  min-width: 260px;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  padding: 8px;
+  display: none;
+  z-index: 1000;
+  border: 1px solid #f1f5f9;
+  text-align: left;
+}
+
+.user-list.open {
+  display: block;
+}
+
+.user-item {
+  padding: 10px 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 2px;
+}
+
+.user-list .user-section-header {
+  padding: 12px 12px 6px;
+  font-size: 0.7rem;
+  color: #94a3b8;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.user-item:hover {
+  background: #f1f5f9;
+}
+
+.user-item.logout-link {
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-top: 8px;
+  padding-top: 14px;
+}
+
+.user-item.logout-link i {
+  font-size: 1.1rem;
+}
+
+.user-item.active {
+  background: #f8fafc;
+  cursor: default;
+}
+
+.user-item .name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1e293b;
+}
+
+.user-item .meta {
+  color: #64748b;
+  font-size: 0.75rem;
+}
+
+.user-item.logout-link:hover {
+  background: #fef2f2;
+}
+
+.user-avatar-placeholder { width: 36px; height: 36px; border-radius: 50%; background: #f1f5f9; color: #64748b; display: flex; align-items: center; justify-content: center; border: 1px solid #e2e8f0; }
+.user-avatar-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #e2e8f0; }
+
+#user-table-body td:nth-child(1), thead th:nth-child(1) { width: 60px; text-align: left; }
+#user-table-body td:nth-child(2), thead th:nth-child(2),
+#user-table-body td:nth-child(4), thead th:nth-child(4),
+#user-table-body td:nth-child(5), thead th:nth-child(5),
+#user-table-body td:nth-child(6), thead th:nth-child(6),
+#user-table-body td:nth-child(8), thead th:nth-child(8),
+#user-table-body td:nth-child(9), thead th:nth-child(9) { text-align: center; }

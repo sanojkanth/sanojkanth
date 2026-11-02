@@ -1,38 +1,79 @@
+# Central Hardwares Management System
 
-# Hi, I'm Sanojkanth 👋
+A web-based hardware shop management system developed as a university group project.
 
-### Aspiring Software Developer | Sri Lanka
+## Overview
 
-I'm a Software Development enthusiast passionate about building
-applications and solving real-world problems through technology.
+The system is designed to support day-to-day hardware store operations through a central management dashboard.
 
-## 🎓 Education
+## Main modules
 
-- Diploma in Software Engineering – Wayamba University
-- HND in Information Technology – SLIIT City Uni
+- Inventory management
+- Customer management
+- Supplier management
+- Order management
+- Invoicing
+- Financial management
+- User management and authentication
+- Services and delivery
+- Reports, notifications and activity logs
 
-## 💻 Technical Skills
+## Technology stack
 
-- Programming: Java, JavaScript, C++, PHP
-- Frontend: HTML, CSS, Bootstrap, jQuery
-- Backend: Node.js, Express.js
-- Database: MySQL, MongoDB
-- Tools: Git, GitHub, VS Code
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** PHP
+- **Database:** MySQL
+- **Dependency management:** Composer
+- **Local development:** WAMP Server
 
-## 🚀 Projects
+## My contribution
 
-Coming soon! Currently working on improving my
-development skills and building projects.
+**User Management**
 
-## 🌱 Currently Learning
+My main contribution to this group project was the User Management module. This repository contains the wider team project; the work should be understood as a collaborative university project, not an individual end-to-end implementation.
 
-- Java Programming
-- Data Structures and Algorithms
-- Git & GitHub
-- Software Development Practices
+## Getting started
 
-## 📫 Connect With Me
+1. Install WAMP Server with PHP and MySQL enabled.
+2. Clone or download this repository into your WAMP `www` directory.
+3. Review `backend php/config.php` and configure the local database connection for your environment.
+4. Open phpMyAdmin and import `database/database.sql` into MySQL.
+5. From the project root, install PHP dependencies with:
 
-- LinkedIn: https://www.linkedin.com/in/surendran-sanojkanth-450248286/
-- GitHub: https://github.com/sanojkanth
+   ```bash
+   composer install
+   ```
 
+6. Start Apache and MySQL in WAMP.
+7. Open the project through your local server, for example:
+
+   `http://localhost/Final%20PPA%20System/`
+
+   Adjust the URL to match the folder name you use in `www`.
+
+## Configuration and security
+
+- Do not commit real passwords, API keys, SMTP credentials, database dumps containing personal information, or production configuration.
+- The bundled SQL file has had its preconfigured demo user accounts removed. Create a fresh account through the application's signup flow.
+- The PHP configuration currently contains local WAMP defaults. Change these for your own machine and keep real credentials out of Git.
+- Stripe/payment settings should use test credentials stored locally, never live keys in source control.
+- This repository is private while team permission and project publication arrangements are being handled.
+
+## Project structure
+
+- `backend php/` – PHP backend endpoints and database configuration
+- `pages/` – application pages
+- `components/` – shared UI components
+- `css/` – stylesheets
+- `js/` – frontend scripts
+- `database/` – MySQL schema and sample data
+- `docs/` – project documentation
+- `images/` – application assets
+
+## Project status
+
+University group project. This repository is being organized for portfolio and learning purposes.
+
+## Acknowledgements
+
+Developed collaboratively as part of a university group project. Team member names and individual contributions should be added here with their agreement.

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Central Hardwares</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+    <link rel="shortcut icon" href="../images/favicon.svg" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/auth.css" />
+    <link rel="stylesheet" href="../css/dark-mode.css" />
+      <link rel="stylesheet" href="../css/responsive.css" />
+  </head>
+  <body class="auth-body">
+    <div class="auth-card">
+      <a href="index.html" class="logo-area auth-logo">
+            <img src="../images/logo-icon.png" alt="Central Hardwares" class="system-logo-icon">
+            <div class="logo-text">
+                <h2>Central</h2>
+                <span>HARDWARES</span>
+            </div>
+        </a>
+
+      <h2>Welcome Back</h2>
+      <p>Sign in to your admin account</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="login-email">Email Address</label>
+          <input
+            type="email"
+            id="login-email"
+            placeholder="admin@example.com"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input
+            type="password"
+            id="login-password"
+            placeholder="••••••••"
+            required
+            minlength="3"
+          />
+        </div>
+        <!-- Section: Login Error -->
+        <div id="login-error" class="login-error-msg"></div>
+        <button type="submit" class="btn-auth" id="login-btn">Sign In</button>
+      </form>
+
+      <div class="auth-links">
+
+        <p class="auth-footer-text">
+          Don't have an account? <a href="signup.html">Sign Up</a>
+        </p>
+      </div>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script>
+      if (localStorage.getItem("currentUser")) {
+        window.location.replace("index.html");
+      }
+
+      window.addEventListener('pageshow', function(event) {
+        if (event.persisted && localStorage.getItem("currentUser")) {
+          window.location.replace("index.html");
+        }
+      });
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const email = document.getElementById("login-email").value;
+          const password = document.getElementById("login-password").value;
+          const errorEl = document.getElementById("login-error");
+          const btn = document.getElementById("login-btn");
+
+          errorEl.style.display = "none";
+          btn.disabled = true;
+          btn.textContent = "Signing in...";
+
+          setTimeout(async function () {
+            // Clear any old session data first
+            localStorage.removeItem("currentUser");
+
+            try {
+              const res = await fetch("../backend php/auth.php?action=login", {
+                method: "POST",
+                credentials: 'include',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+              });
+              const data = await res.json();
+              if (data.success) {
+                localStorage.setItem("currentUser", JSON.stringify(data.user));
+                // Small delay ensures cookie is fully committed by browser before page change
+                setTimeout(() => {
+                  window.location.href = "index.html";
+                }, 500);
+              } else {
+                errorEl.innerHTML = `<i class="fa-solid fa-circle-xmark" style="margin-right:8px;"></i> ${data.error || "Incorrect password"}`;
+                errorEl.style.display = "block";
+                btn.disabled = false;
+                btn.textContent = "Sign In";
+              }
+            } catch (err) {
+              console.error("Login fetch error:", err);
+              let errMsg = err.message;
+              if (window.location.protocol === 'file:') {
+                  errMsg = "Cannot connect to backend from a file:// URL. Please open this via WAMP Server (http://localhost/...)";
+              }
+              errorEl.innerHTML = `<i class="fa-solid fa-circle-xmark" style="margin-right:8px;"></i> Connection error: ${errMsg}`;
+              errorEl.style.display = "block";
+              btn.disabled = false;
+              btn.textContent = "Sign In";
+            }
+          }, 500);
+        });
+    </script>
+  </body>
+</html>

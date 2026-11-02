@@ -1,0 +1,9 @@
+/* =========================================
+   SUPPLIERS MODULE STYLES
+   ========================================= */
+
+/* Specific alignments for Suppliers Table */
+#supplier-table-body td:nth-child(1), #suppliers-table thead th:nth-child(1) { width: 80px; text-align: left; }
+#supplier-table-body td:nth-child(3), #suppliers-table thead th:nth-child(3),
+#supplier-table-body td:nth-child(4), #suppliers-table thead th:nth-child(4),
+#supplier-table-body td:nth-child(7), #suppliers-table thead th:nth-child(7) { text-align: center; }

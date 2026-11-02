@@ -1,0 +1,270 @@
+/* Clean Header */
+.alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.alert-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.alert-link {
+    font-size: 0.95rem;
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.alert-link:hover {
+    text-decoration: underline;
+    color: #1557b0;
+}
+
+.alert-header h3 i {
+    color: #ea4335;
+}
+
+.alert-list {
+    max-height: 240px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Redesigned Item */
+.alert-card .alert-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 4px; /* Balanced padding */
+    border-bottom: 1px solid #f0f2f5;
+    gap: 15px;
+}
+
+.alert-card .alert-item:last-child {
+    border-bottom: none;
+}
+
+.alert-card .alert-info {
+    display: flex;
+    align-items: center; 
+    gap: 12px;
+    flex: 1; /* Allow info to take space */
+    min-width: 0;
+}
+
+.alert-card .alert-info strong {
+    font-size: 0.9rem;
+    color: #1a1f36;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Explicit badge targeting if available or using span fallback */
+.alert-card .alert-info .alert-badge, 
+.alert-card .alert-info span { 
+    font-size: 0.75rem;
+    color: #dc2626;
+    background-color: #fee2e2;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.alert-card .btn-reorder {
+    background: #fff;
+    border: 1px solid #1a73e8;
+    color: #1a73e8;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.alert-card .btn-reorder:hover {
+    background: #1a73e8;
+    color: #fff;
+}
+
+/* refined Status select - Monochrome Pill Style */
+.status-select {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.3px;
+    line-height: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: all 0.2s;
+    outline: none;
+    text-align: center;
+    width: auto;
+}
+
+.status-select:hover {
+    background-color: #e2e8f0;
+    border-color: #cbd5e1;
+}
+
+.status-select.pending,
+.status-select.complete,
+.status-select.requested,
+.status-select.cancelled {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+/* Modal Items Styling */
+.items-container {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.items-header {
+    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.items-input-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    margin-bottom: 15px;
+}
+
+.items-input-group {
+    flex: 1;
+}
+
+.items-input-group.large {
+    flex: 2;
+}
+
+.items-input-group label {
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.items-input-group input,
+.items-input-group select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+
+.btn-add-item {
+    padding: 8px 12px;
+    height: 38px;
+}
+
+.items-list-container {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    background: white;
+}
+
+.items-table {
+    width: 100%;
+    font-size: 0.85rem;
+    border-collapse: collapse;
+}
+
+.items-table th {
+    background: #e9ecef;
+    padding: 6px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+}
+
+.items-table td {
+    padding: 6px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.text-right { text-align: right !important; }
+.text-center { text-align: center !important; }
+.w-60 { width: 60px !important; }
+.w-30 { width: 30px !important; }
+.w-48 { width: 48% !important; }
+.mb-15 { margin-bottom: 15px !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.modal-sm { max-width: 400px !important; }
+.form-control-lg { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ddd; }
+.text-muted-sm { color: #666; font-size: 0.8rem; }
+.grid-2-col { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.flex-between-center { display: flex; justify-content: space-between; align-items: center; }
+.text-total-label { display: block; font-size: 0.8rem; color: #666; }
+.text-total-value { font-size: 1.4rem; color: #1a73e8; }
+.empty-table-msg { text-align: center; color: #999; padding: 10px; }
+
+/* ── Low Stock Alert Panel ───────────────────────────────── */
+.low-stock-panel-hidden {
+    display: none;
+    margin-bottom: 20px;
+}
+
+.alert-card-padded {
+    padding: 16px 20px;
+}
+
+/* ── Reorder Modal ─────────────────────────────────────── */
+.reorder-modal-icon {
+    color: #1a73e8;
+}
+
+.reorder-info-banner {
+    display: none; /* shown by JS when modal opens */
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 0.875rem;
+}
+
+.reorder-stock-badge {
+    margin-left: 10px;
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.78rem;
+}
